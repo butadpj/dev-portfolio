@@ -3,7 +3,8 @@ import { createSignal } from "solid-js";
 function Navbar() {
   const [isSideNavOpen, setIsSideNavOpen] = createSignal(false);
 
-  const translateX = () => (isSideNavOpen() ? "0" : "full");
+  const translateX = () =>
+    isSideNavOpen() ? "translate-x-0" : "translate-x-full";
 
   const handleNavOpen = () => {
     setIsSideNavOpen(true);
@@ -36,7 +37,7 @@ function Navbar() {
       </nav>
 
       <div
-        class={`content fixed bottom-0 left-1/4 right-0 top-0 translate-x-${translateX()} z-10 flex-col items-center justify-end gap-8 bg-primary transition-all`}
+        class={`content fixed bottom-0 left-1/4 right-0 top-0 ${translateX()} z-10 flex-col items-center justify-end gap-8 bg-primary transition-all`}
       >
         <div
           class="close-button absolute right-3 top-3 cursor-pointer px-5 py-3"
