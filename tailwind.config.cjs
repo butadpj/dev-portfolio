@@ -23,6 +23,12 @@ module.exports = {
         mitr: ["Mitr", "sans-serif"],
         k2d: ["K2D", "sans-serif"],
       },
+      width: {
+        "180%": "180%",
+      },
+      height: {
+        "80%": "80%",
+      },
     },
   },
   plugins: [],

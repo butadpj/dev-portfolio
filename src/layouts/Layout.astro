@@ -51,9 +51,8 @@ const { title } = Astro.props;
   }
 
   body {
-    font-family: system-ui, sans-serif;
-    background-color: #f6f6f6;
-
+    background-color: var(--light-bg);
+    color: var(--light);
     font-family: "Mitr", "sans-serif";
   }
 
@@ -68,5 +67,22 @@ const { title } = Astro.props;
 
   .text-shadow {
     text-shadow: 0px 3px 0px var(--accent);
+  }
+
+  .hoverable {
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hoverable:hover {
+    filter: brightness(75%);
+  }
+
+  .no-highlight {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  .no-highlight:focus {
+    outline: none !important;
   }
 </style>

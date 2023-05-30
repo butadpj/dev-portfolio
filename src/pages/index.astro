@@ -1,54 +1,68 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
 import Navbar from "../components/Navbar/Navbar";
+import Section from "../components/Section/Section";
 ---
 
 <Layout title="Welcome to Astro.">
-  <Navbar client:load />
+  <Navbar
+    links={[
+      { to: "/", name: "Home" },
+      { to: "#about", name: "About" },
+      { to: "/#projects", name: "Projects" },
+      { to: "/#contact", name: "Contact" },
+    ]}
+    client:load
+  />
+
+  <div class="circles">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <main>
+    <Section id="projects" title={{ name: "Projects" }}>
+      <h2>Hey!</h2>
+    </Section>
+  </main>
 </Layout>
 
 <style>
   main {
-    margin: auto;
-    padding: 1.5rem;
-    max-width: 60ch;
+    padding-top: 5rem;
   }
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0;
+
+  .circles > div {
+    position: absolute;
+    background-color: var(--accent-fade);
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
   }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
+
+  .circles > div:nth-child(1) {
+    top: 7%;
+    left: 20%;
+    transform: scale(0.8);
   }
-  .instructions {
-    line-height: 1.6;
-    margin: 1rem 0;
-    border: 1px solid rgba(var(--accent), 25%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.4rem;
+
+  .circles > div:nth-child(2) {
+    top: 1%;
+    left: 70%;
+    transform: scale(0.4);
   }
-  .instructions code {
-    font-size: 0.875em;
-    font-weight: bold;
-    background: rgba(var(--accent), 12%);
-    color: rgb(var(--accent));
-    border-radius: 4px;
-    padding: 0.3em 0.45em;
+
+  .circles > div:nth-child(3) {
+    top: 30%;
+    left: -5%;
+    transform: scale(1.2);
   }
-  .instructions strong {
-    color: rgb(var(--accent));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 1rem;
-    padding: 0;
+
+  .circles > div:nth-child(4) {
+    top: 20%;
+    left: 90%;
+    transform: scale(2);
   }
 </style>
