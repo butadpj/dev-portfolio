@@ -1,19 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar/Navbar";
-import Section from "../components/Section/Section";
+import Navbar from "../sharedComponents/Navbar/Navbar";
+import Section from "../sharedComponents/Section/Section";
 ---
 
 <Layout title="Welcome to Astro.">
-  <Navbar
-    links={[
-      { to: "/", name: "Home" },
-      { to: "#about", name: "About" },
-      { to: "/#projects", name: "Projects" },
-      { to: "/#contact", name: "Contact" },
-    ]}
-    client:load
-  />
+  <Navbar client:load />
 
   <div class="circles">
     <div></div>
@@ -23,11 +15,27 @@ import Section from "../components/Section/Section";
   </div>
 
   <main>
+    <Section id="home" title={{ name: "Home" }}>
+      <div class="home-img">
+        <img
+          class="coder parallax"
+          data-rate="1"
+          src="./assets/coder.svg"
+          alt="illustration-coder"
+          width="255"
+        />
+      </div
+      
+      >
+
+      <h2>Hey!</h2>
+    </Section>
     <Section id="projects" title={{ name: "Projects" }}>
       <h2>Hey!</h2>
     </Section>
   </main>
 </Layout>
+
 
 <style>
   main {
@@ -66,3 +74,4 @@ import Section from "../components/Section/Section";
     transform: scale(2);
   }
 </style>
+
