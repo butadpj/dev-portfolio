@@ -1,0 +1,41 @@
+<div class="bg-circles">
+  <div></div>
+  <div></div>
+  <div></div>
+
+  <div></div>
+</div>
+
+<style>
+  .bg-circles > div {
+    position: absolute;
+    background-color: var(--accent-fade);
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+  }
+
+  .bg-circles > div:nth-child(1) {
+    top: 7%;
+    left: 20%;
+    transform: scale(0.8);
+  }
+
+  .bg-circles > div:nth-child(2) {
+    top: 1%;
+    left: 70%;
+    transform: scale(0.4);
+  }
+
+  .bg-circles > div:nth-child(3) {
+    top: 30%;
+    left: -5%;
+    transform: scale(1.2);
+  }
+
+  .bg-circles > div:nth-child(4) {
+    top: 20%;
+    left: 90%;
+    transform: scale(2);
+  }
+</style>

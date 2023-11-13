@@ -1,4 +1,4 @@
-import { For } from "solid-js";
+import { For, type Setter } from "solid-js";
 
 export interface Link {
   to: string;
@@ -7,15 +7,26 @@ export interface Link {
 }
 
 interface LinksProps {
+  class?: string;
   links: Link[];
+  setActiveLink: Setter<"Home" | "Projects" | "About" | "Contact" | string>;
 }
 
 export default function Links(props: LinksProps) {
+  const activeLinkClass = () =>
+    "active text-shadow underline underline-offset-8 decoration-4";
+
   return (
-    <ul class="links mb-10 flex list-none flex-col items-center gap-10 font-k2d text-3xl font-semibold">
+    <ul
+      class={`navbar-links mb-10 flex list-none flex-col items-center gap-10 font-k2d font-semibold ${props.class}`}
+    >
       <For each={props.links}>
         {(link) => (
-          <a class="nav-link" href={link.to}>
+          <a
+            onClick={() => props.setActiveLink(link.name.toLowerCase())}
+            class={`nav-link ${link.isActive ? activeLinkClass() : ""}`}
+            href={link.to}
+          >
             <li class="hoverable">{link.name}</li>
           </a>
         )}

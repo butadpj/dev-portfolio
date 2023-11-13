@@ -11,6 +11,7 @@ module.exports = {
         primaryDark: "#144ad6",
 
         accent: "#ee6807",
+        accent2: "#c4ff5e",
         accentFade: "#ee68071a",
 
         dark: "#121213",

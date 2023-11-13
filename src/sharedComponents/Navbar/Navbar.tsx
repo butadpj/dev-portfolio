@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup } from "solid-js";
+import { createEffect, createSignal, onMount } from "solid-js";
 import Content from "./components/Content";
 import {
   FaBrandsDev,
@@ -7,85 +7,96 @@ import {
   FaBrandsSquareYoutube,
   FaSolidBars,
 } from "solid-icons/fa";
+import {
+  closeWhenClickOutside,
+  smoothSectionScrolling,
+  updateActiveLinks,
+} from "./hooks";
 
 export default function Navbar() {
+  const [activeLink, setActiveLink] = createSignal<string>("home");
   const [isContentOpen, setIsContentOpen] = createSignal(false);
 
-  const handleNavOpen = () => {
+  const openNav = () => {
     setIsContentOpen(true);
   };
 
-  const handleNavClose = () => {
+  const closeNav = () => {
     setIsContentOpen(false);
   };
 
-  createEffect(() => {
-    const closeWhenClickOutside = (event: Event) => {
-      let target = event.target as HTMLDivElement;
-      if (
-        !target.closest(".navbar-content") &&
-        !target.closest(".navbar-bars")
-      ) {
-        handleNavClose();
+  const initLinks = () => {
+    const links = [
+      { to: "#home", name: "Home" },
+      { to: "#about", name: "About" },
+      { to: "#projects", name: "Projects" },
+      { to: "#contact", name: "Contact" },
+    ];
+
+    return links.map((link) => {
+      if (link.name.toLowerCase() === activeLink()) {
+        return { ...link, isActive: true };
       }
-    };
+      return link;
+    });
+  };
 
-    document.addEventListener("click", closeWhenClickOutside);
-
-    onCleanup(() =>
-      document.removeEventListener("click", closeWhenClickOutside)
-    );
+  onMount(() => {
+    closeWhenClickOutside(closeNav);
+    updateActiveLinks(setActiveLink);
+    smoothSectionScrolling();
   });
 
   return (
     <>
-      <nav class="navbar fixed z-10 flex w-full items-center justify-between border-b border-b-primary bg-background px-8 py-6">
-        <div class="navbar-logo scrollToTop flex items-end gap-2">
+      <nav class="navbar fixed z-10 flex w-full items-center justify-between border-b border-b-primary bg-background px-6 py-4">
+        <div
+          class={`navbar-logo scrollToTop flex items-end gap-2 hoverable ${
+            isContentOpen() ? "opacity-0" : "opacity-100"
+          }`}
+        >
           <img
             src="/assets/logo-transparent.svg"
             alt="butadpj's logo"
-            width="33"
+            width="22"
           />
-          <span class="navbar-logo-text text-shadow-sm font-k2d text-3xl font-bold italic text-primary">
+          <span class="navbar-logo-text text-shadow-sm font-k2d text-xl font-bold italic text-primary">
             butadpj
           </span>
         </div>
 
         <div
-          onClick={handleNavOpen}
-          class="navbar-bars hoverable cursor-pointer rounded-md bg-primary p-2.5 text-white"
+          onClick={openNav}
+          class="navbar-bars hoverable cursor-pointer rounded-md bg-primary p-2 text-white"
         >
-          <FaSolidBars size={35} />
+          <FaSolidBars size={22} />
         </div>
       </nav>
 
-      <Content isOpen={isContentOpen()} closeButtonClick={handleNavClose}>
-        <Content.Links
-          links={[
-            { to: "/", name: "Home" },
-            { to: "#about", name: "About" },
-            { to: "/#projects", name: "Projects" },
-            { to: "/#contact", name: "Contact" },
-          ]}
-        />
-        <Content.Resume />
+      <Content
+        class="text-2xl"
+        isOpen={isContentOpen()}
+        closeButtonClick={closeNav}
+      >
+        <Content.Links links={initLinks()} setActiveLink={setActiveLink} />
+        <Content.Resume class="text-xl" />
         <Content.Socials
           socials={[
             {
               href: "https://github.com/butadpj",
-              icon: <FaBrandsSquareGithub size={50} />,
+              icon: <FaBrandsSquareGithub size={45} />,
             },
             {
               href: "https://dev.to/butadpj",
-              icon: <FaBrandsDev size={50} />,
+              icon: <FaBrandsDev size={45} />,
             },
             {
               href: "https://www.youtube.com/@butadpj",
-              icon: <FaBrandsSquareYoutube size={50} />,
+              icon: <FaBrandsSquareYoutube size={45} />,
             },
             {
               href: "https://www.linkedin.com/in/paul-john-butad-5bb70a218",
-              icon: <FaBrandsLinkedin size={50} />,
+              icon: <FaBrandsLinkedin size={45} />,
             },
           ]}
         />
