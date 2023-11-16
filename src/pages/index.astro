@@ -1,20 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../sharedComponents/Navbar/Navbar";
-import Section from "../sharedComponents/Section/Section";
 import MomentumScroll from "../sharedComponents/MomentumScroll";
-import Hero from "../sharedComponents/HomeSections/Hero";
-import Projects from "../sharedComponents/HomeSections/Projects";
+import Hero from "./HomeSections/Hero";
 import BgCircles from "../sharedComponents/BgCircles.astro";
+import Projects from "./HomeSections/Projects/Projects";
+import About from "./HomeSections/About";
 ---
 
 <Layout title="butadpj - I am a Developer.">
   <Navbar client:load />
 
-  <MomentumScroll client:visible>
+  <MomentumScroll client:load>
     <BgCircles />
 
     <Hero />
+    <About client:visible />
     <Projects />
   </MomentumScroll>
 </Layout>
