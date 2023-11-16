@@ -17,7 +17,7 @@ function Content(props: ContentProps) {
 
   return (
     <div
-      class={`navbar-content fixed bottom-0 left-1/4 right-0 top-0 ${translateX()} z-10 flex flex-col items-center justify-end gap-[8vh] bg-primary pb-20 transition-all duration-200 ${
+      class={`navbar-content fixed bottom-0 left-1/4 right-0 top-0 ${translateX()} z-30 flex flex-col items-center justify-end gap-[8vh] bg-primary pb-20 transition-all duration-200 ${
         props.class
       }`}
     >
