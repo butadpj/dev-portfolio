@@ -25,7 +25,7 @@ function Section(props: {
         <h2
           class={`section-title ${
             merged.title.color || "text-primary"
-          } relative w-fit font-k2d text-4xl font-bold before:absolute before:left-0 before:top-1/2 before:inline-block before:h-80% before:w-180% before:-translate-x-1/2 before:bg-primaryFade before:content-[""]`}
+          } relative w-fit font-k2d text-4xl font-bold tracking-wider before:absolute before:left-0 before:top-1/2 before:inline-block before:h-80% before:w-180% before:-translate-x-1/2 before:bg-primaryFade before:content-[""]`}
         >
           {merged.title.name}
         </h2>
