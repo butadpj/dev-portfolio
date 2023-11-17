@@ -1,16 +1,7 @@
 import { type Setter } from "solid-js";
 
-function debounce(func: () => void, delay: number) {
-  let timeoutId: number | undefined;
+const OFFSET = 71;
 
-  // Clear the previous timeout
-  clearTimeout(timeoutId);
-
-  // Set a new timeout
-  timeoutId = setTimeout(() => {
-    func();
-  }, delay);
-}
 export function closeWhenClickOutside(closeNav: () => void) {
   const navbarBars = document.querySelector(".navbar-bars");
   const navbarContent = document.querySelector(".navbar-content");
@@ -31,28 +22,12 @@ export function closeWhenClickOutside(closeNav: () => void) {
 
 export function updateActiveLinkOnScroll(setActiveLink: Setter<string>) {
   const sections = document.querySelectorAll("section");
-  const navbar = document.querySelector("nav");
-  const navbarLogo = document.querySelector(".navbar-logo");
-  const navbarContent = document.querySelector(".navbar-content");
-
   const BODY = document.documentElement || document.body;
 
   const handler = () => {
     sections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top <= 50 && rect.bottom >= 50) {
+      if (section.offsetTop - OFFSET <= BODY.scrollTop) {
         setActiveLink(section.id);
-      }
-
-      if (
-        section.id === "contact" &&
-        BODY.scrollTop >= section.offsetTop - 70
-      ) {
-        navbar?.classList.add("hide");
-        navbarContent?.classList.remove("show");
-      } else {
-        navbar?.classList.remove("hide");
-        navbarLogo?.classList.remove("hide");
       }
     });
   };
@@ -68,14 +43,14 @@ export function scrollToActiveLink(setActiveLink: Setter<string>) {
 
   navLinks?.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
-    const anchorElement = target.parentNode;
+    const anchorElement = target.parentNode as HTMLElement;
 
-    if (anchorElement.matches(".nav-link")) {
-      const sectionId = anchorElement.getAttribute("href");
+    if (anchorElement?.matches(".nav-link")) {
+      const sectionId = anchorElement.getAttribute("href") || "";
       const section = document.querySelector(sectionId) as HTMLElement;
 
       setActiveLink(section.id);
-      BODY.scrollTop = section.offsetTop - 70;
+      BODY.scrollTop = section.offsetTop - OFFSET;
     }
   });
 }

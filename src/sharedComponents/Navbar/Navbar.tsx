@@ -49,7 +49,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav class="navbar fixed z-20 flex w-full items-center justify-between border-b border-b-primary bg-background px-6 py-4">
+      <nav class="navbar glassmorphism fixed z-30 flex w-full items-center justify-between border-b border-b-primary bg-background px-6 py-4 transition-transform duration-300">
         <div
           class={`navbar-logo scrollToTop hoverable flex items-end gap-2 ${
             isContentOpen() ? "opacity-0" : "opacity-100"
@@ -74,7 +74,7 @@ export default function Navbar() {
       </nav>
 
       <Content
-        class="text-2xl text-white"
+        class="glassmorphism-primary text-2xl text-white"
         isOpen={isContentOpen()}
         closeButtonClick={closeNav}
       >

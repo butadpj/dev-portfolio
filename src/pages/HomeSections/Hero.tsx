@@ -13,7 +13,7 @@ function Hero(props: HeroProps) {
       title={{ name: "Home" }}
       noTitle
     >
-      <div class="home-img relative w-[90%] max-w-md">
+      <div class="home-img relative z-20 w-[90%] max-w-md">
         <img
           class="coder parallax w-full"
           data-rate="1"
@@ -27,7 +27,7 @@ function Hero(props: HeroProps) {
       </div>
 
       <h1
-        class="home-text parallax text-shadow px-10 py-0 text-center text-5xl leading-[5.5rem] tracking-wide text-primary"
+        class="home-text parallax text-shadow z-10 px-10 py-0 text-center text-5xl leading-[5.5rem] tracking-wide text-primary"
         data-rate="-2.5"
       >
         I am a Developer

@@ -7,7 +7,11 @@ interface ProjectsProps {
 
 function Projects(props: ProjectsProps) {
   return (
-    <Section class="px-6 py-16" id="projects" title={{ name: "Projects" }}>
+    <Section
+      class="px-6 py-16"
+      id="projects"
+      title={{ name: "Projects", color: "text-accent" }}
+    >
       <div class="project-previews mt-20 flex flex-wrap items-start justify-center gap-8">
         <Preview
           isSuperProject
