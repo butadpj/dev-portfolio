@@ -1,4 +1,4 @@
-import { onCleanup, type Setter } from "solid-js";
+import { type Setter } from "solid-js";
 
 function debounce(func: () => void, delay: number) {
   let timeoutId: number | undefined;
@@ -27,11 +27,9 @@ export function closeWhenClickOutside(closeNav: () => void) {
   };
 
   document.addEventListener("click", handler);
-
-  onCleanup(() => document.removeEventListener("click", handler));
 }
 
-export function updateActiveLinks(setActiveLink: Setter<string>) {
+export function updateActiveLinkOnScroll(setActiveLink: Setter<string>) {
   const sections = document.querySelectorAll("section");
   const navbar = document.querySelector("nav");
   const navbarLogo = document.querySelector(".navbar-logo");
@@ -41,10 +39,9 @@ export function updateActiveLinks(setActiveLink: Setter<string>) {
 
   const handler = () => {
     sections.forEach((section) => {
-      if (section.offsetTop - 70 <= BODY.scrollTop) {
-        debounce(() => {
-          setActiveLink(section.id);
-        }, 100);
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 50 && rect.bottom >= 50) {
+        setActiveLink(section.id);
       }
 
       if (
@@ -62,28 +59,23 @@ export function updateActiveLinks(setActiveLink: Setter<string>) {
 
   if (sections.length) {
     window.addEventListener("scroll", handler);
-
-    onCleanup(() => window.removeEventListener("scroll", handler));
   }
 }
 
-export function smoothSectionScrolling() {
-  // const navLinks = document.querySelectorAll(".nav-link");
-  // const BODY = document.documentElement || document.body;
-  // if (navLinks.length > 0) {
-  //   navLinks.forEach((link) => {
-  //     link.addEventListener("click", (e) => {
-  //       const sectionId = link.getAttribute("href");
-  //       console.log(sectionId);
-  //       if (sectionId?.[0] === "#") {
-  //         e.preventDefault();
-  //         const section = document.querySelector(sectionId);
-  //         console.log(section.offsetTop);
-  //         // Scroll with offset
-  //         BODY.scrollTop = section.offsetTop - 70;
-  //         location.hash = "SADSDA";
-  //       }
-  //     });
-  //   });
-  // }
+export function scrollToActiveLink(setActiveLink: Setter<string>) {
+  const navLinks = document.querySelector(".navbar-links");
+  const BODY = document.documentElement || document.body;
+
+  navLinks?.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const anchorElement = target.parentNode;
+
+    if (anchorElement.matches(".nav-link")) {
+      const sectionId = anchorElement.getAttribute("href");
+      const section = document.querySelector(sectionId) as HTMLElement;
+
+      setActiveLink(section.id);
+      BODY.scrollTop = section.offsetTop - 70;
+    }
+  });
 }

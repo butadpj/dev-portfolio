@@ -1,4 +1,4 @@
-import { createEffect, type JSX } from "solid-js";
+import { onMount, type JSX } from "solid-js";
 //@ts-ignore
 import Butter from "butter-es6";
 
@@ -7,7 +7,7 @@ interface MomentumScrollProps {
 }
 
 function MomentumScroll(props: MomentumScrollProps) {
-  createEffect(() => {
+  onMount(() => {
     Butter.init({
       wrapperId: "butter",
       cancelOnTouch: true,

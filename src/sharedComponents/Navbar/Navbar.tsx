@@ -9,8 +9,8 @@ import {
 } from "solid-icons/fa";
 import {
   closeWhenClickOutside,
-  smoothSectionScrolling,
-  updateActiveLinks,
+  scrollToActiveLink,
+  updateActiveLinkOnScroll,
 } from "./hooks";
 
 export default function Navbar() {
@@ -43,8 +43,8 @@ export default function Navbar() {
 
   onMount(() => {
     closeWhenClickOutside(closeNav);
-    updateActiveLinks(setActiveLink);
-    smoothSectionScrolling();
+    updateActiveLinkOnScroll(setActiveLink);
+    scrollToActiveLink(setActiveLink);
   });
 
   return (
