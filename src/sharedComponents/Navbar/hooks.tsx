@@ -68,9 +68,10 @@ export function scrollToActiveLink(setActiveLink: Setter<string>) {
 
   navLinks?.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
+    const anchorElement = target.parentNode;
 
-    if (target.matches(".hoverable")) {
-      const sectionId = `#${target.textContent?.toLowerCase()}`;
+    if (anchorElement.matches(".nav-link")) {
+      const sectionId = anchorElement.getAttribute("href");
       const section = document.querySelector(sectionId) as HTMLElement;
 
       setActiveLink(section.id);
