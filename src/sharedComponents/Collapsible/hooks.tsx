@@ -30,7 +30,7 @@ export function collapsibleLogic(collapsible: HTMLDivElement) {
     }
   });
 
-  // Initialize the maxHeight value
+  // If collapsible is open initially..
   if (collapsible.classList.contains("open")) {
     content.style.maxHeight = `${content.scrollHeight}px`;
 

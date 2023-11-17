@@ -1,11 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../sharedComponents/Navbar/Navbar";
-import MomentumScroll from "../sharedComponents/MomentumScroll";
+import MomentumScroll from "../sharedComponents/MomentumScroll/MomentumScroll";
 import Hero from "./HomeSections/Hero";
 import BgCircles from "../sharedComponents/BgCircles.astro";
 import Projects from "./HomeSections/Projects/Projects";
 import About from "./HomeSections/About";
+import Contact from "./HomeSections/Contact";
 ---
 
 <Layout title="butadpj - I am a Developer.">
@@ -15,7 +16,8 @@ import About from "./HomeSections/About";
     <BgCircles />
 
     <Hero />
-    <About client:visible />
+    <About client:load />
     <Projects />
+    <Contact />
   </MomentumScroll>
 </Layout>
