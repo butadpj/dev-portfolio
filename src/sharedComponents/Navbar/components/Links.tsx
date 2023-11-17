@@ -23,7 +23,6 @@ export default function Links(props: LinksProps) {
       <For each={props.links}>
         {(link) => (
           <a
-            onClick={() => props.setActiveLink(link.name.toLowerCase())}
             class={`nav-link ${link.isActive ? activeLinkClass() : ""}`}
             href={link.to}
           >
