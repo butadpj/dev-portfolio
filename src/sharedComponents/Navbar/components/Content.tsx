@@ -17,15 +17,15 @@ function Content(props: ContentProps) {
 
   return (
     <div
-      class={`navbar-content fixed bottom-0 left-1/4 right-0 top-0 ${translateX()} z-40 flex flex-col items-center justify-end gap-[8vh] bg-primary pb-20 transition-all duration-200 ${
+      class={`navbar-content fixed bottom-0 left-1/4  right-0 top-0 ${translateX()} z-40 flex flex-col items-center justify-end gap-[8vh] bg-primary pb-[8vh] text-xl text-white transition-all duration-200 md:text-2xl lg:left-[40%] ${
         props.class
       }`}
     >
       <div
-        class="close-button hoverable absolute right-2 top-4 cursor-pointer px-5 py-3"
+        class="close-button hoverable absolute right-2 top-3 cursor-pointer px-5 py-3 text-3xl md:right-5 md:text-4xl lg:right-11 lg:top-6 lg:text-[2.5rem]"
         onClick={() => props.closeButtonClick()}
       >
-        <FaSolidArrowRight size={32} />
+        <FaSolidArrowRight />
       </div>
 
       {props.children}

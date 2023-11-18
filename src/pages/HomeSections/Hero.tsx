@@ -22,7 +22,12 @@ function Hero(props: HeroProps) {
           width="255"
         />
         <div class="dots parallax absolute right-[-3%] top-[20%]" data-rate="5">
-          <img src="./assets/dots.svg" alt="dots-img" width="26" />
+          <img
+            src="./assets/dots.svg"
+            alt="dots-img"
+            width="26"
+            class="md:w-10"
+          />
         </div>
       </div>
 
