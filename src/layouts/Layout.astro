@@ -1,18 +1,21 @@
 ---
 export interface Props {
   title: string;
-  meta?: {
+  description?: string;
+  ogMeta?: {
     title: string;
-    description: string;
+    url?: string;
+    image?: string;
   };
 }
 
 const {
-  title,
-  meta = {
-    title: "Solving people's problems through technology and design.",
-    description:
-      "I'm Paul, a Filipino self-taught software developer. I love solving people's problems with my passion in technology and design.",
+  title = "butadpj - Coding, Coffee, & Fitness 💻☕️💪",
+  description = "I'm Paul, a Filipino software developer. I love solving people's problems with the help of my own unique experiences.",
+  ogMeta = {
+    title: "Solving people's problems through my own unique experiences.",
+    url: "https://dev.butadpj.com/",
+    image: "/assets/meta-img.png",
   },
 } = Astro.props;
 ---
@@ -22,34 +25,22 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="title" content={meta.title} />
-    <meta name="description" content={meta.description} />
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://dev.butadpj.com/" />
-    <meta
-      property="og:title"
-      content="Solving people's problems through technology and design."
-    />
-    <meta
-      property="og:description"
-      content="I'm Paul, a Filipino self-taught software developer. I love solving people's problems with my passion in technology and design."
-    />
-    <meta property="og:image" content="/assets/meta-img.png" />
+    <meta property="og:url" content={ogMeta.url} />
+    <meta property="og:title" content={ogMeta.title || title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogMeta.image} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://dev.butadpj.com/" />
-    <meta
-      property="twitter:title"
-      content="Solving people's problems through technology and design."
-    />
-    <meta
-      property="twitter:description"
-      content="I'm Paul, a Filipino self-taught software developer. I love solving people's problems with my passion in technology and design."
-    />
-    <meta property="twitter:image" content="/assets/meta-img.png" />
+    <meta property="twitter:url" content={ogMeta.url} />
+    <meta property="twitter:title" content={ogMeta.title || title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogMeta.image} />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

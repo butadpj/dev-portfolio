@@ -24,6 +24,7 @@ interface Technologies {
 
 interface Props {
   title: string;
+  description: string;
   swiperBgImage?: string;
   swiperSlides?: Array<SlideProps>;
   tags?: Array<string>;
@@ -34,6 +35,7 @@ interface Props {
 
 const {
   title,
+  description,
   swiperBgImage,
   swiperSlides = [],
   tags = [],
@@ -41,9 +43,18 @@ const {
   technologies = [],
   pubDate,
 } = Astro.props;
+
+const url = Astro.request.url;
 ---
 
-<Layout title={title}>
+<Layout
+  title={`Project - ${title}`}
+  ogMeta={{
+    title: description,
+    url,
+    image: swiperBgImage,
+  }}
+>
   <Navbar client:load />
   <main class="pb-10 pt-28 md:pt-32">
     <div class="px-4 md:px-16 lg:px-20">
