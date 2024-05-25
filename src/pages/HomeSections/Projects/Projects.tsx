@@ -1,8 +1,11 @@
+import type { CollectionEntry } from "astro:content";
 import Section from "../../../sharedComponents/Section";
 import Preview from "./components/Preview";
+import { For } from "solid-js";
 
 interface ProjectsProps {
   // add props here
+  projects: Array<CollectionEntry<"projects">>;
 }
 
 function Projects(props: ProjectsProps) {
@@ -13,18 +16,31 @@ function Projects(props: ProjectsProps) {
       title={{ name: "Projects", color: "text-accent" }}
     >
       <div class="project-previews mt-20 flex flex-wrap items-start justify-center gap-8">
-        <Preview
-          isSuperProject
-          logo={
-            <img src="./assets/game-antena-logo.svg" alt="game-antena-logo" />
-          }
-          description="Browse Top Games and Streams from popular platforms like Twitch &
-        Youtube"
-          tags={["Fullstack", "User Auth", "Caching", "Email Confirm"]}
-          demoLink="https://game-antena.com"
-        />
+        <For each={props.projects}>
+          {({ data, slug }) => (
+            <Preview
+              isSuperProject={data.isSuperProject}
+              logo={
+                <>
+                  {data.logo.img && (
+                    <img
+                      src={data.logo.img.url}
+                      alt={data.logo.img.alt}
+                      width={data.logo.img.size}
+                    />
+                  )}
+                  {data.logo.text && <p>{data.logo.text}</p>}
+                </>
+              }
+              description={data.description}
+              tags={data.tags}
+              projectId={slug}
+              demoLink={data.buttons.liveDemoButton?.url}
+            />
+          )}
+        </For>
 
-        <Preview
+        {/* <Preview
           class="no-highlight"
           logo={<p>Game-Antena's (API) backend</p>}
           description="Game-Antena's API made with Typescript (NestJS)"
@@ -66,7 +82,7 @@ function Projects(props: ProjectsProps) {
           description="Tournament bracket generator using JavaScript"
           tags={["Vanilla JS", "Jest (Testing)", "Modularized Code"]}
           demoLink="https://butadpj.github.io/bracketour/"
-        />
+        /> */}
       </div>
     </Section>
   );

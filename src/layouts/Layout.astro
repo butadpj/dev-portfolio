@@ -1,9 +1,20 @@
 ---
 export interface Props {
   title: string;
+  meta?: {
+    title: string;
+    description: string;
+  };
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  meta = {
+    title: "Solving people's problems through technology and design.",
+    description:
+      "I'm Paul, a Filipino self-taught software developer. I love solving people's problems with my passion in technology and design.",
+  },
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -11,14 +22,8 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta
-      name="title"
-      content="Solving people's problems through technology and design."
-    />
-    <meta
-      name="description"
-      content="I'm Paul, a Filipino self-taught software developer. I love solving people's problems with my passion in technology and design."
-    />
+    <meta name="title" content={meta.title} />
+    <meta name="description" content={meta.description} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -54,8 +59,10 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="bg-background font-mitr">
+  <body class="font-mitr">
     <slot />
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   </body>
 </html>
 <style is:global>
@@ -63,16 +70,38 @@ const { title } = Astro.props;
 
   :root {
     --dark: #121213;
-    --light: #f2f2f2;
+    --light: #eef3ff;
     --accent: #ee6807;
     --primaryDark: #144ad6;
     --primary: #5081ff;
+
+    --foreground: var(--dark);
+    --background: var(--light);
   }
+
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --dark: #121213;
+      --light: #eef3ff;
+      --accent: #ee6807;
+      --primaryDark: #144ad6;
+      --primary: #5081ff;
+
+      --foreground: var(--light);
+      --background: var(--dark);
+    }
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
   }
 
   h1,
@@ -85,6 +114,7 @@ const { title } = Astro.props;
   span {
     color: var(--primaryDark);
   }
+
   code {
     font-family:
       Menlo,

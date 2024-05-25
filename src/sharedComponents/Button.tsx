@@ -20,7 +20,7 @@ function Button(props: ButtonProps) {
         return "border-light bg-transparent text-light hover:text-dark hover:border-light hover:shadow-[inset_12rem_0_0_0_var(--light)]";
 
       case "outline-dark":
-        return "border-dark bg-transparent text-dark hover:text-light hover:border-dark hover:shadow-[inset_12rem_0_0_0_var(--dark)]";
+        return "border-dark dark:border-light bg-transparent text-dark dark:text-light hover:text-light dark:hover:text-dark hover:border-dark dark:hover:border-light hover:shadow-[inset_12rem_0_0_0_var(--dark)] dark:hover:shadow-[inset_12rem_0_0_0_var(--light)]";
 
       default:
         return "border-primaryDark bg-primaryDark text-light";
@@ -29,7 +29,7 @@ function Button(props: ButtonProps) {
 
   return (
     <button
-      class={` cursor-pointer rounded-md border p-2 transition-all duration-300 ${getButtonTheme()} ${
+      class={`cursor-pointer rounded-md border p-2 transition-all duration-500 ${getButtonTheme()} ${
         props.class
       }`}
     >

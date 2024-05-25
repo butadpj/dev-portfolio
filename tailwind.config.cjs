@@ -16,9 +16,7 @@ module.exports = {
 
         dark: "#121213",
         darkFade: "#121213cc",
-        light: "#f2f2f2",
-
-        background: "#eef3ff",
+        light: "#eef3ff",
       },
       fontFamily: {
         mitr: ["Mitr", "sans-serif"],

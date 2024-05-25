@@ -7,6 +7,10 @@ import BgCircles from "../sharedComponents/BgCircles.astro";
 import Projects from "./HomeSections/Projects/Projects";
 import About from "./HomeSections/About";
 import Contact from "./HomeSections/Contact";
+
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
 ---
 
 <Layout title="butadpj - I am a Developer.">
@@ -17,7 +21,7 @@ import Contact from "./HomeSections/Contact";
 
     <Hero />
     <About client:load />
-    <Projects />
+    <Projects projects={projects} />
     <Contact />
   </MomentumScroll>
 </Layout>
