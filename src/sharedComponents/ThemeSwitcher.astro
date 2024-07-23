@@ -1,0 +1,25 @@
+---
+import { FiMoon, FiSun } from "solid-icons/fi";
+---
+
+<div class="theme-switch hoverable">
+  <FiSun id="light" class="dark:block hidden text-light" />
+  <FiMoon id="dark" class="dark:hidden" />
+</div>
+
+<script>
+  const themeSwitches = document.querySelectorAll(".theme-switch");
+  if (themeSwitches.length > 0) {
+    themeSwitches.forEach((themeSwitch, i) => {
+      const darkButton = themeSwitch.querySelector("#dark");
+      const lightButton = themeSwitch.querySelector("#light");
+
+      darkButton?.addEventListener("click", (e) => {
+        document.documentElement.classList.add("dark");
+      });
+      lightButton?.addEventListener("click", (e) => {
+        document.documentElement.classList.remove("dark");
+      });
+    });
+  }
+</script>

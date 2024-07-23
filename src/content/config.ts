@@ -1,5 +1,5 @@
 import { defineCollection } from "astro:content";
-import { projetsSchemas } from "./schemas";
+import { blogsSchemas, projetsSchemas } from "./schemas";
 // Define a `type` and `schema` for each collection
 
 const projectsCollection = defineCollection({
@@ -7,6 +7,12 @@ const projectsCollection = defineCollection({
   schema: projetsSchemas,
 });
 
+const blogsCollection = defineCollection({
+  type: "content",
+  schema: blogsSchemas,
+});
+
 export const collections = {
   projects: projectsCollection,
+  blogs: blogsCollection,
 };

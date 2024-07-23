@@ -1,5 +1,4 @@
 import { z } from "astro:content";
-import type { ButtonProps } from "../layouts/ProjectDetails.astro";
 
 export const projetsSchemas = z.object({
   title: z.string(),
@@ -44,4 +43,19 @@ export const projetsSchemas = z.object({
       description: z.string(),
     }),
   ),
+});
+
+export const blogsSchemas = z.object({
+  title: z.string(),
+  pubDate: z.date(),
+  description: z.string(),
+  backgroundImage: z
+    .object({
+      url: z.string(),
+      alt: z.string(),
+      size: z.number().optional(),
+    })
+    .optional(),
+
+  tags: z.array(z.string()).optional(),
 });

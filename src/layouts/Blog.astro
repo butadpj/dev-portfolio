@@ -1,0 +1,85 @@
+---
+import { FaRegularSun, FaSolidMoon, FaSolidSun } from "solid-icons/fa";
+import Layout from "./Root.astro";
+import { FiMoon, FiSun } from "solid-icons/fi";
+import ThemeSwitcher from "../sharedComponents/ThemeSwitcher.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  tags?: Array<string>;
+  pubDate?: Date;
+  backgroundImage: string;
+}
+
+const { title, description, tags = [], pubDate, backgroundImage } = Astro.props;
+
+const url = Astro.request.url;
+---
+
+<Layout
+  title={`Project - ${title}`}
+  ogMeta={{
+    title: description,
+    url,
+    image: backgroundImage,
+  }}
+>
+  <main class="px-4 py-6">
+    <header class="flex items-center justify-between">
+      <a href="/" class="flex w-fit items-center gap-2">
+        <img
+          class="md:w-8"
+          src="/assets/logo-transparent.svg"
+          alt="butadpj's logo"
+          width="22"
+        />
+        <span
+          class="navbar-logo-text text-shadow-sm mb-1 font-k2d text-xl font-bold italic text-primary md:text-2xl"
+        >
+          butadpj
+        </span>
+      </a>
+
+      <div class="buttons">
+        <ThemeSwitcher />
+      </div>
+    </header>
+
+    <div class="px-4 pt-10 md:px-16 lg:px-20">
+      <h2
+        class={`section-title mx-0 pr-20 text-accent relative w-fit font-k2d text-4xl font-bold tracking-wider before:absolute before:left-0 before:top-[28%] before:inline-block before:h-[100%] before:w-[120%] before:-translate-x-1/2 before:bg-accentFade before:content-[""]`}
+      >
+        {title}
+      </h2>
+
+      <div class="my-10 w-full text-center font-k2d">
+        {
+          pubDate && (
+            <div>
+              Published:{" "}
+              <span class="font-semibold text-current">
+                {" "}
+                {pubDate.toLocaleDateString()}
+              </span>
+            </div>
+          )
+        }
+      </div>
+
+      <div
+        class="tags mx-auto flex w-[100%] max-w-xl flex-wrap items-center justify-evenly gap-5"
+      >
+        {
+          tags.map((tag) => (
+            <span class="rounded-full bg-primaryDark px-4 py-1 text-white">
+              {tag}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+
+    <slot />
+  </main>
+</Layout>

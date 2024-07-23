@@ -12,7 +12,7 @@ function About(props: AboutProps) {
       noTitle
       class="mx-auto my-0 flex max-w-[40rem] flex-col gap-y-8 px-10 py-8"
     >
-      <h2 class="about-hello text-3xl text-primaryDark">
+      <h2 class="about-hello text-3xl text-primaryDark dark:text-light">
         Hello <span class="wave">👋</span>,
       </h2>
       <div class="about-text text mb-4 text-xl font-medium">

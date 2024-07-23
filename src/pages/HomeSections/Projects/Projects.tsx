@@ -13,7 +13,7 @@ function Projects(props: ProjectsProps) {
     <Section
       class="px-6 py-16"
       id="projects"
-      title={{ name: "Projects", color: "text-accent" }}
+      title={{ name: "Projects", color: "text-accent", style: "md:pl-20" }}
     >
       <div class="project-previews mt-20 flex flex-wrap items-start justify-center gap-8">
         <For each={props.projects}>

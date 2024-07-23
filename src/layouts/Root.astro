@@ -21,7 +21,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -47,6 +47,31 @@ const {
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="manifest" href="/site.webmanifest" />
+
+    <script is:inline>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+
+      // Whenever the user explicitly chooses light mode
+      localStorage.theme = "light";
+
+      // Whenever the user explicitly chooses dark mode
+      localStorage.theme = "dark";
+
+      // Whenever the user explicitly chooses to respect the OS preference
+      localStorage.removeItem("theme");
+    </script>
+
+    <slot name="preload" />
+
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
@@ -60,14 +85,38 @@ const {
   @import url("https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Mitr:wght@400;500;600;700&display=swap");
 
   :root {
-    --dark: #121213;
-    --light: #eef3ff;
-    --accent: #ee6807;
-    --primaryDark: #144ad6;
-    --primary: #5081ff;
+    --dark: 240, 3%, 7%;
+    --light: 222, 100%, 97%;
+    --accent: 25, 94%, 48%;
+    --primaryDark: 223, 83%, 46%;
+    --primaryLight: 223, 21%, 55%;
+    --primary: 223, 100%, 66%;
+    --accent2: 82, 100%, 68%;
 
-    --foreground: var(--dark);
-    --background: var(--light);
+    --foreground: hsl(var(--dark));
+    --background: hsl(var(--light));
+  }
+
+  html.dark:root {
+    --dark: 240, 3%, 7%;
+    --light: 222, 100%, 97%;
+    --accent: 25, 94%, 48%;
+    --primaryDark: 223, 83%, 46%;
+    --primaryLight: 223, 21%, 55%;
+    --primary: 223, 100%, 66%;
+    --accent2: 82, 100%, 68%;
+
+    --foreground: hsl(var(--primary));
+    --background: hsl(var(--dark));
+  }
+
+  html.dark span {
+    color: hsl(var(--light));
+  }
+
+  html.dark ::selection {
+    color: hsl(var(--accent));
+    background: hsl(var(--primaryDark));
   }
 
   * {
@@ -75,19 +124,6 @@ const {
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --dark: #121213;
-      --light: #eef3ff;
-      --accent: #ee6807;
-      --primaryDark: #144ad6;
-      --primary: #5081ff;
-
-      --foreground: var(--light);
-      --background: var(--dark);
-    }
   }
 
   body {
@@ -103,7 +139,7 @@ const {
   }
 
   span {
-    color: var(--primaryDark);
+    color: hsl(var(--primaryDark));
   }
 
   code {
@@ -135,11 +171,11 @@ const {
   }
 
   .text-shadow-sm {
-    text-shadow: 0px 2px 0px var(--accent);
+    text-shadow: 0px 2px 0px hsl(var(--accent));
   }
 
   .text-shadow {
-    text-shadow: 0px 4px 0px var(--accent);
+    text-shadow: 0px 4px 0px hsl(var(--accent));
   }
 
   .hoverable {
@@ -174,8 +210,8 @@ const {
   }
 
   ::selection {
-    color: var(--light);
-    background: var(--primaryDark);
+    color: hsl(var(--light));
+    background: hsl(var(--primaryDark));
   }
 
   .wave {

@@ -14,13 +14,13 @@ function Button(props: ButtonProps) {
         return "border-dark bg-dark text-light";
 
       case "outline":
-        return "border-primaryDark bg-transparent text-primaryDark hover:text-light hover:border-primaryDark hover:shadow-[inset_12rem_0_0_0_var(--primaryDark)]";
+        return "border-primaryDark bg-transparent text-primaryDark dark:text-light dark:border-light hover:text-light dark:hover:text-dark hover:border-primaryDark dark:hover:border-light hover:shadow-[inset_12rem_0_0_0_hsl(var(--primaryDark))] dark:hover:shadow-[inset_12rem_0_0_0_hsl(var(--light))]";
 
       case "outline-light":
-        return "border-light bg-transparent text-light hover:text-dark hover:border-light hover:shadow-[inset_12rem_0_0_0_var(--light)]";
+        return "border-light bg-transparent text-light hover:text-dark hover:border-light hover:shadow-[inset_12rem_0_0_0_hsl(var(--light))]";
 
       case "outline-dark":
-        return "border-dark dark:border-light bg-transparent text-dark dark:text-light hover:text-light dark:hover:text-dark hover:border-dark dark:hover:border-light hover:shadow-[inset_12rem_0_0_0_var(--dark)] dark:hover:shadow-[inset_12rem_0_0_0_var(--light)]";
+        return "border-dark dark:border-light bg-transparent text-dark dark:text-light hover:text-light dark:hover:text-dark hover:border-dark dark:hover:border-light hover:shadow-[inset_12rem_0_0_0_hsl(var(--dark))] dark:hover:shadow-[inset_12rem_0_0_0_hsl(var(--light))]";
 
       default:
         return "border-primaryDark bg-primaryDark text-light";

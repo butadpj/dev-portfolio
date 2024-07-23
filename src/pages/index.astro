@@ -1,5 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../layouts/Root.astro";
 import Navbar from "../sharedComponents/Navbar/Navbar";
 import MomentumScroll from "../sharedComponents/MomentumScroll/MomentumScroll";
 import Hero from "./HomeSections/Hero";
@@ -7,10 +7,12 @@ import BgCircles from "../sharedComponents/BgCircles.astro";
 import Projects from "./HomeSections/Projects/Projects";
 import About from "./HomeSections/About";
 import Contact from "./HomeSections/Contact";
+import Learn from "./HomeSections/Learn";
 
 import { getCollection } from "astro:content";
 
 const projects = await getCollection("projects");
+const blogs = await getCollection("blogs");
 ---
 
 <Layout title="butadpj - I am a Developer.">
@@ -22,6 +24,8 @@ const projects = await getCollection("projects");
     <Hero />
     <About client:load />
     <Projects projects={projects} />
+    <Learn blogs={blogs} />
+
     <Contact />
   </MomentumScroll>
 </Layout>

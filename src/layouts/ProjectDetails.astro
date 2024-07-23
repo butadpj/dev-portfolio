@@ -1,10 +1,11 @@
 ---
-import Layout from "./Layout.astro";
+import Layout from "./Root.astro";
 import Navbar from "../sharedComponents/Navbar/Navbar";
 import BackButton from "../sharedComponents/BackButton";
 import Swiper, { type SlideProps } from "../sharedComponents/Swiper";
 import Button from "../sharedComponents/Button";
 import { BsCursorFill, BsGithub } from "solid-icons/bs";
+import MomentumScroll from "../sharedComponents/MomentumScroll/MomentumScroll";
 
 export interface ButtonProps {
   repoButton: {
@@ -56,102 +57,110 @@ const url = Astro.request.url;
   }}
 >
   <Navbar client:load />
-  <main class="pb-10 pt-28 md:pt-32">
-    <div class="px-4 md:px-16 lg:px-20">
-      <BackButton className="mb-10" client:load />
+  <MomentumScroll client:load>
+    <main class="pb-10 pt-28 md:pt-32">
+      <div class="px-4 md:px-16 lg:px-20">
+        <BackButton className="mb-10" client:load />
 
-      <h2
-        class={`section-title mx-0 pr-20 text-accent relative w-fit font-k2d text-4xl font-bold tracking-wider before:absolute before:left-0 before:top-[28%] before:inline-block before:h-[100%] before:w-[120%] before:-translate-x-1/2 before:bg-accentFade before:content-[""]`}
-      >
-        Project - {title}
-      </h2>
+        <h2
+          class={`section-title mx-0 pr-20 text-accent relative w-fit font-k2d text-4xl font-bold tracking-wider before:absolute before:left-0 before:top-[28%] before:inline-block before:h-[100%] before:w-[120%] before:-translate-x-1/2 before:bg-accentFade before:content-[""]`}
+        >
+          Project - {title}
+        </h2>
 
-      <div class="my-10 w-full text-center font-k2d">
-        {
-          pubDate && (
-            <div>
-              Published:{" "}
-              <span class="font-semibold text-current">
-                {" "}
-                {pubDate.toLocaleDateString()}
+        <div class="my-10 w-full text-center font-k2d">
+          {
+            pubDate && (
+              <div>
+                Published:{" "}
+                <span class="font-semibold text-current">
+                  {" "}
+                  {pubDate.toLocaleDateString()}
+                </span>
+              </div>
+            )
+          }
+        </div>
+
+        <div
+          class="tags mx-auto flex w-[100%] max-w-xl flex-wrap items-center justify-evenly gap-5"
+        >
+          {
+            tags.map((tag) => (
+              <span class="rounded-full bg-primaryDark px-4 py-1 text-white">
+                {tag}
               </span>
-            </div>
-          )
-        }
+            ))
+          }
+        </div>
       </div>
+
+      <Swiper
+        client:only
+        slides={swiperSlides}
+        bgImageUrl={swiperBgImage}
+        className="my-8 h-60 md:h-[24rem] lg:h-[32rem]"
+      />
 
       <div
-        class="tags mx-auto flex w-[100%] max-w-xl flex-wrap items-center justify-evenly gap-5"
+        class="project-info flex flex-col items-center gap-12 px-6 pb-8 md:px-12 lg:pt-6"
       >
-        {
-          tags.map((tag) => (
-            <span class="rounded-full bg-primaryDark px-4 py-1 text-white">
-              {tag}
-            </span>
-          ))
-        }
-      </div>
-    </div>
+        <div class="text max-w-4xl md:text-lg lg:text-xl lg:leading-9">
+          <slot />
+        </div>
 
-    <Swiper
-      client:only
-      slides={swiperSlides}
-      bgImageUrl={swiperBgImage}
-      className="my-8 h-60 md:h-[24rem] lg:h-[32rem]"
-    />
-
-    <div class="project-info flex flex-col items-center gap-12 px-6 pb-8">
-      <div class="text">
-        <slot />
-      </div>
-
-      <div class="flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
-        <a
-          href={buttons?.repoButton.url || "https://github.com"}
-          target="_blank"
+        <div
+          class="flex flex-wrap items-center justify-center gap-x-16 gap-y-8"
         >
-          <Button
-            theme={"outline-dark"}
-            class="flex items-center gap-2 px-4 py-2"
+          <a
+            href={buttons?.repoButton.url || "https://github.com"}
+            target="_blank"
           >
-            {buttons?.repoButton.text || "Repo"}
-            <BsGithub />
-          </Button>
-        </a>
-
-        {
-          buttons.liveDemoButton && (
-            <a
-              href={buttons?.liveDemoButton.url || "https://dev.butadpj.com"}
-              target="_blank"
+            <Button
+              theme={"outline-dark"}
+              class="flex items-center gap-2 px-4 py-2"
             >
-              <Button
-                theme={"outline"}
-                class="flex items-center gap-2 px-4 py-2"
+              {buttons?.repoButton.text || "Repo"}
+              <BsGithub />
+            </Button>
+          </a>
+
+          {
+            buttons.liveDemoButton && (
+              <a
+                href={buttons?.liveDemoButton.url || "https://dev.butadpj.com"}
+                target="_blank"
               >
-                {buttons?.liveDemoButton.text || "Live demo"}
-                <BsCursorFill />
-              </Button>
-            </a>
-          )
-        }
-      </div>
+                <Button
+                  theme={"outline"}
+                  class="flex items-center gap-2 px-4 py-2"
+                >
+                  {buttons?.liveDemoButton.text || "Live demo"}
+                  <BsCursorFill />
+                </Button>
+              </a>
+            )
+          }
+        </div>
 
-      <div class="w-full">
-        <h2 class="mb-5 text-2xl text-primaryDark">Technologies:</h2>
+        <div class="w-full max-w-4xl">
+          <h2 class="mb-5 text-2xl text-primaryDark dark:text-primary">
+            Technologies:
+          </h2>
 
-        {
-          technologies.length > 0 && (
-            <ul class="ml-2 flex list-inside list-disc flex-col gap-5 italic">
-              {technologies.map((technology) => (
-                <li>
-                  <span>{technology.title}</span> - {technology.description}
-                </li>
-              ))}
-            </ul>
-          )
-        }
+          {
+            technologies.length > 0 && (
+              <ul class="ml-2 flex list-inside list-disc flex-col gap-5 italic">
+                {technologies.map((technology) => (
+                  <li>
+                    <span>{technology.title}</span> - {technology.description}
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
+  </MomentumScroll>
 </Layout>

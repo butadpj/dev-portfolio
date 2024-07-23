@@ -1,22 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "selector",
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
       colors: {
-        primary: "#5081ff",
+        primary: "hsl(var(--primary))",
         primaryFade: "#5283ff26",
-        primaryLight: "#7683a5",
+        primaryLight: "hsl(var(--primaryLight))",
         primaryLightFade: "#7683a526",
-        primaryDark: "#144ad6",
+        primaryDark: "hsl(var(--primaryDark))",
 
-        accent: "#ee6807",
-        accent2: "#c4ff5e",
+        accent: "hsl(var(--accent))",
+        accent2: "hsl(var(--accent2))",
         accentFade: "#ee68071a",
 
-        dark: "#121213",
+        dark: "hsl(var(--dark))",
         darkFade: "#121213cc",
-        light: "#eef3ff",
+        light: "hsl(var(--light))",
       },
       fontFamily: {
         mitr: ["Mitr", "sans-serif"],
