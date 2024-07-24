@@ -30,7 +30,7 @@ function Learn(props: LearnProps) {
                     height={360}
                     class="dark:border dark:border-white h-full w-full object-cover"
                   />
-                  <div class="absolute bottom-0 flex w-full items-center justify-between bg-primary/50 p-4 text-light">
+                  <div class="absolute bottom-0 flex w-full items-center justify-between bg-primary/50 px-4 py-2 text-sm text-light">
                     <div>{calculateReadingTime(body)} min read</div>
 
                     <div>
@@ -45,10 +45,10 @@ function Learn(props: LearnProps) {
                 </div>
 
                 <div class={`dark:text-light ml-1 mt-2 space-y-2`}>
-                  <div class="line-clamp-2 overflow-hidden text-ellipsis text-xl font-bold">
+                  <div class="line-clamp-2 overflow-hidden text-ellipsis text-lg font-bold">
                     {data.title}
                   </div>
-                  <div>{data.description}</div>
+                  <div class="text-sm">{data.description}</div>
                 </div>
               </a>
             );
