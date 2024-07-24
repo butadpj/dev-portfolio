@@ -22,6 +22,7 @@ module.exports = {
       fontFamily: {
         mitr: ["Mitr", "sans-serif"],
         k2d: ["K2D", "sans-serif"],
+        openSans: ["Open Sans", "sans-serif"],
       },
       width: {
         "180%": "180%",
@@ -31,5 +32,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

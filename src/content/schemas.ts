@@ -49,13 +49,6 @@ export const blogsSchemas = z.object({
   title: z.string(),
   pubDate: z.date(),
   description: z.string(),
-  backgroundImage: z
-    .object({
-      url: z.string(),
-      alt: z.string(),
-      size: z.number().optional(),
-    })
-    .optional(),
-
+  backgroundImage: z.string().optional(),
   tags: z.array(z.string()).optional(),
 });
