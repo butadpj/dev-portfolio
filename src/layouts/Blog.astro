@@ -22,7 +22,7 @@ const currentYear = new Date().getFullYear();
 ---
 
 <Layout
-  title={`Project - ${title}`}
+  title={`${title}`}
   ogMeta={{
     title: description,
     url,
@@ -96,7 +96,7 @@ const currentYear = new Date().getFullYear();
     <hr class="my-6" />
 
     <article
-      class="prose dark:prose-invert font-openSans mx-auto mb-10 xl:text-lg"
+      class="prose mx-auto mb-10 font-openSans dark:prose-invert xl:text-lg"
     >
       <slot />
     </article>
