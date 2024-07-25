@@ -1,7 +1,7 @@
 import { For } from "solid-js";
 import Section from "../../sharedComponents/Section";
 import type { CollectionEntry } from "astro:content";
-import { calculateReadingTime } from "../../utils";
+import { calculateReadingTime, formatDate } from "../../utils";
 
 interface LearnProps {
   blogs: Array<CollectionEntry<"blogs">>;
@@ -33,14 +33,7 @@ function Learn(props: LearnProps) {
                   <div class="absolute bottom-0 flex w-full items-center justify-between bg-primary/50 px-4 py-2 text-sm text-light">
                     <div>{calculateReadingTime(body)} min read</div>
 
-                    <div>
-                      {data.pubDate &&
-                        data.pubDate.toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                    </div>
+                    <div>{data.pubDate && formatDate(data.pubDate)}</div>
                   </div>
                 </div>
 

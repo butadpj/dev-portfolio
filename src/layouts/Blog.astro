@@ -4,6 +4,7 @@ import Layout from "./Root.astro";
 import { FiMoon, FiSun } from "solid-icons/fi";
 import ThemeSwitcher from "../sharedComponents/ThemeSwitcher.astro";
 import { Image } from "astro:assets";
+import { formatDate } from "../utils";
 
 interface Props {
   title: string;
@@ -62,8 +63,7 @@ const currentYear = new Date().getFullYear();
             <div>
               Published:{" "}
               <span class="font-semibold text-current">
-                {" "}
-                {pubDate.toLocaleDateString()}
+                {formatDate(pubDate)}
               </span>
             </div>
           )
