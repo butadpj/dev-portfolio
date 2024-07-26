@@ -30,6 +30,7 @@ export default function Navbar() {
       { to: "#home", name: "Home" },
       { to: "#about", name: "About" },
       { to: "#projects", name: "Projects" },
+      { to: "#learn", name: "Learn" },
       { to: "#contact", name: "Contact" },
     ];
 

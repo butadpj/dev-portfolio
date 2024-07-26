@@ -20,24 +20,34 @@ function Learn(props: LearnProps) {
             return (
               <a
                 href={`/blogs/${slug}`}
-                class="font-openSans hoverable block max-w-lg"
+                class="hoverable block max-w-lg font-openSans"
               >
+                <div class="mb-2 flex flex-wrap gap-2">
+                  {data.tags?.map((tag, index) => (
+                    <div class="rounded-full bg-primaryDark px-2 py-1 text-xs capitalize text-white">
+                      {tag}
+                    </div>
+                  ))}
+                </div>
+
                 <div class="relative aspect-video">
                   <img
                     src={data.backgroundImage}
                     alt={`Blog ${data.title}'s preview image`}
                     width={360}
                     height={360}
-                    class="dark:border dark:border-white h-full w-full object-cover"
+                    class="h-full w-full object-cover dark:border dark:border-white"
                   />
-                  <div class="absolute bottom-0 flex w-full items-center justify-between bg-primary/50 px-4 py-2 text-sm text-light">
-                    <div>{calculateReadingTime(body)} min read</div>
+                  <div class="absolute bottom-0 w-full space-y-2 bg-primary/50 px-4 py-2 text-sm text-light">
+                    <div class="flex items-center justify-between ">
+                      <div>{calculateReadingTime(body)} min read</div>
 
-                    <div>{data.pubDate && formatDate(data.pubDate)}</div>
+                      <div>{data.pubDate && formatDate(data.pubDate)}</div>
+                    </div>
                   </div>
                 </div>
 
-                <div class={`dark:text-light ml-1 mt-2 space-y-2`}>
+                <div class={`ml-1 mt-2 space-y-2 dark:text-light`}>
                   <div class="line-clamp-2 overflow-hidden text-ellipsis text-lg font-bold">
                     {data.title}
                   </div>
