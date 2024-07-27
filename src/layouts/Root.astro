@@ -52,6 +52,21 @@ const {
 
     <ViewTransitions />
 
+    <!-- Google tag (gtag.js) -->
+    <script
+      is:inline
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-JTQE73033M"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-JTQE73033M");
+    </script>
+
     <script is:inline>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       if (
@@ -83,172 +98,173 @@ const {
     <slot />
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  </body><style is:global>
-    @import url("https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Mitr:wght@400;500;600;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+    <style is:global>
+      @import url("https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Mitr:wght@400;500;600;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
-    :root {
-      --dark: 240 3% 7%;
-      --light: 222 100% 97%;
-      --accent: 25 94% 48%;
-      --primaryDark: 223 83% 46%;
-      --primaryLight: 223 21% 55%;
-      --primary: 223 100% 66%;
-      --accent2: 82 100% 68%;
+      :root {
+        --dark: 240 3% 7%;
+        --light: 222 100% 97%;
+        --accent: 25 94% 48%;
+        --primaryDark: 223 83% 46%;
+        --primaryLight: 223 21% 55%;
+        --primary: 223 100% 66%;
+        --accent2: 82 100% 68%;
 
-      --foreground: hsl(var(--dark));
-      --background: hsl(var(--light));
-    }
-
-    html.dark:root {
-      --dark: 240 3% 7%;
-      --light: 222 100% 97%;
-      --accent: 25 94% 48%;
-      --primaryDark: 223 83% 46%;
-      --primaryLight: 223 21% 55%;
-      --primary: 223 100% 66%;
-      --accent2: 82 100% 68%;
-
-      --foreground: hsl(var(--primary));
-      --background: hsl(var(--dark));
-    }
-
-    html.dark span {
-      color: hsl(var(--light));
-    }
-
-    html.dark ::selection {
-      color: hsl(var(--accent));
-      background: hsl(var(--primaryDark));
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      color: var(--foreground);
-      background: var(--background);
-    }
-
-    h1,
-    h2,
-    h3,
-    h4 {
-      font-weight: 500;
-    }
-
-    span {
-      color: hsl(var(--primaryDark));
-    }
-
-    code {
-      font-family:
-        Menlo,
-        Monaco,
-        Lucida Console,
-        Liberation Mono,
-        DejaVu Sans Mono,
-        Bitstream Vera Sans Mono,
-        Courier New,
-        monospace;
-    }
-
-    .glassmorphism {
-      /* From https://css.glass */
-      background: rgba(238, 243, 255, 0.2);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
-
-    .glassmorphism-primary {
-      background: rgba(20, 75, 215, 0.8);
-      /* border-radius: 16px; */
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
-
-    .text-shadow-sm {
-      text-shadow: 0px 2px 0px hsl(var(--accent));
-    }
-
-    .text-shadow {
-      text-shadow: 0px 4px 0px hsl(var(--accent));
-    }
-
-    .hoverable {
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .hoverable:hover {
-      filter: brightness(85%);
-    }
-
-    /* Toggle class */
-    .navbar.hide {
-      transform: translateY(-20vh);
-    }
-
-    .navbar-content.show {
-      transform: translateX(0vw);
-      /* touch-action: none; */
-    }
-
-    .navbar-logo.hide {
-      opacity: 0;
-    }
-
-    .no-highlight {
-      -webkit-tap-highlight-color: transparent;
-      -webkit-touch-callout: none;
-    }
-    .no-highlight:focus {
-      outline: none !important;
-    }
-
-    ::selection {
-      color: hsl(var(--light));
-      background: hsl(var(--primaryDark));
-    }
-
-    .wave {
-      animation-name: wave-animation; /* Refers to the name of your @keyframes element below */
-      animation-duration: 2.5s; /* Change to speed up or slow down */
-      animation-iteration-count: infinite; /* Never stop waving :) */
-      transform-origin: 70% 70%; /* Pivot around the bottom-left palm */
-      display: inline-block;
-    }
-
-    @keyframes wave-animation {
-      0% {
-        transform: rotate(0deg);
+        --foreground: hsl(var(--dark));
+        --background: hsl(var(--light));
       }
-      10% {
-        transform: rotate(40deg);
-      } /* The following five values can be played with to make the waving more or less extreme */
-      20% {
-        transform: rotate(-15deg);
+
+      html.dark:root {
+        --dark: 240 3% 7%;
+        --light: 222 100% 97%;
+        --accent: 25 94% 48%;
+        --primaryDark: 223 83% 46%;
+        --primaryLight: 223 21% 55%;
+        --primary: 223 100% 66%;
+        --accent2: 82 100% 68%;
+
+        --foreground: hsl(var(--primary));
+        --background: hsl(var(--dark));
       }
-      30% {
-        transform: rotate(30deg);
+
+      html.dark span {
+        color: hsl(var(--light));
       }
-      40% {
-        transform: rotate(-10deg);
+
+      html.dark ::selection {
+        color: hsl(var(--accent));
+        background: hsl(var(--primaryDark));
       }
-      50% {
-        transform: rotate(15deg);
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
       }
-      60% {
-        transform: rotate(0deg);
-      } /* Reset for the last half to pause */
-      100% {
-        transform: rotate(0deg);
+
+      body {
+        color: var(--foreground);
+        background: var(--background);
       }
-    }
-  </style>
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-weight: 500;
+      }
+
+      span {
+        color: hsl(var(--primaryDark));
+      }
+
+      code {
+        font-family:
+          Menlo,
+          Monaco,
+          Lucida Console,
+          Liberation Mono,
+          DejaVu Sans Mono,
+          Bitstream Vera Sans Mono,
+          Courier New,
+          monospace;
+      }
+
+      .glassmorphism {
+        /* From https://css.glass */
+        background: rgba(238, 243, 255, 0.2);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+      }
+
+      .glassmorphism-primary {
+        background: rgba(20, 75, 215, 0.8);
+        /* border-radius: 16px; */
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+      }
+
+      .text-shadow-sm {
+        text-shadow: 0px 2px 0px hsl(var(--accent));
+      }
+
+      .text-shadow {
+        text-shadow: 0px 4px 0px hsl(var(--accent));
+      }
+
+      .hoverable {
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .hoverable:hover {
+        filter: brightness(85%);
+      }
+
+      /* Toggle class */
+      .navbar.hide {
+        transform: translateY(-20vh);
+      }
+
+      .navbar-content.show {
+        transform: translateX(0vw);
+        /* touch-action: none; */
+      }
+
+      .navbar-logo.hide {
+        opacity: 0;
+      }
+
+      .no-highlight {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+      }
+      .no-highlight:focus {
+        outline: none !important;
+      }
+
+      ::selection {
+        color: hsl(var(--light));
+        background: hsl(var(--primaryDark));
+      }
+
+      .wave {
+        animation-name: wave-animation; /* Refers to the name of your @keyframes element below */
+        animation-duration: 2.5s; /* Change to speed up or slow down */
+        animation-iteration-count: infinite; /* Never stop waving :) */
+        transform-origin: 70% 70%; /* Pivot around the bottom-left palm */
+        display: inline-block;
+      }
+
+      @keyframes wave-animation {
+        0% {
+          transform: rotate(0deg);
+        }
+        10% {
+          transform: rotate(40deg);
+        } /* The following five values can be played with to make the waving more or less extreme */
+        20% {
+          transform: rotate(-15deg);
+        }
+        30% {
+          transform: rotate(30deg);
+        }
+        40% {
+          transform: rotate(-10deg);
+        }
+        50% {
+          transform: rotate(15deg);
+        }
+        60% {
+          transform: rotate(0deg);
+        } /* Reset for the last half to pause */
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+    </style>
+  </body>
 </html>
