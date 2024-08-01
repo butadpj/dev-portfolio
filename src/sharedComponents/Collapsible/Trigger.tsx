@@ -9,7 +9,7 @@ interface TriggerProps {
 
 function Trigger(props: TriggerProps) {
   return (
-    <h4 class="trigger hoverable flex w-fit items-center gap-2 text-primary dark:text-primaryLight">
+    <h4 class="trigger hoverable flex w-fit items-center gap-2 text-primaryDark dark:text-accent">
       {props.label} <FaSolidAngleRight />
       {/* {props.children(<FaSolidAngleRight />)} */}
     </h4>
