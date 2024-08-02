@@ -51,4 +51,5 @@ export const blogsSchemas = z.object({
   description: z.string(),
   backgroundImage: z.string().optional(),
   tags: z.array(z.string()).optional(),
+  isDraft: z.boolean().default(false),
 });

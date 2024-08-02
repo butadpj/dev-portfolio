@@ -19,7 +19,7 @@ function About(props: AboutProps) {
         I'm Paul, I love solving people's problems with my passion in{" "}
         <span>technology</span> and <span>design</span>.
       </div>
-      <Collapsible>
+      <Collapsible class="text-lg">
         <Collapsible.Trigger label="Experiences:" />
         <Collapsible.Content>
           <ul class="flex list-inside list-disc flex-col gap-3">
@@ -37,7 +37,7 @@ function About(props: AboutProps) {
         </Collapsible.Content>
       </Collapsible>
 
-      <Collapsible>
+      <Collapsible class="text-lg">
         <Collapsible.Trigger label="More info:" />
         <Collapsible.Content>
           <ul class="flex list-inside list-disc flex-col gap-3">
@@ -47,7 +47,7 @@ function About(props: AboutProps) {
         </Collapsible.Content>
       </Collapsible>
 
-      <Collapsible initiallyClose>
+      <Collapsible class="text-lg" initiallyClose>
         <Collapsible.Trigger label="Fun facts about me:" />
         <Collapsible.Content>
           <ul class="flex list-inside list-disc flex-col gap-3">

@@ -12,9 +12,17 @@ interface Props {
   tags?: Array<string>;
   pubDate?: Date;
   backgroundImage?: string;
+  isDraft?: boolean;
 }
 
-const { title, description, tags = [], pubDate, backgroundImage } = Astro.props;
+const {
+  title,
+  description,
+  tags = [],
+  pubDate,
+  backgroundImage,
+  isDraft,
+} = Astro.props;
 
 const url = Astro.request.url;
 
@@ -29,6 +37,14 @@ const currentYear = new Date().getFullYear();
     image: backgroundImage,
   }}
 >
+  {
+    isDraft && (
+      <div class="sticky top-0 z-10 bg-accent text-center font-normal italic text-white">
+        This is a draft. The author is having trouble finishing this blog lol 😭
+      </div>
+    )
+  }
+
   <main class="p-6 md:px-16 lg:px-32 xl:px-60 2xl:px-96">
     <header class="flex items-center justify-between md:px-4">
       <a href="/" class="flex w-fit items-center gap-2">
