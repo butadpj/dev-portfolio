@@ -8,6 +8,11 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
+  markdown: {
+    shikiConfig: {
+      wrap: true,
+    },
+  },
   integrations: [
     solidJs({
       devtools: true,
