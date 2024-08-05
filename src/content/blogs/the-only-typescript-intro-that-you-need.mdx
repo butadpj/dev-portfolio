@@ -1,16 +1,16 @@
 ---
 title: "The Only TypeScript Introduction That You Need"
-pubDate: 2000-01-01
+pubDate: 2024-08-05
 description: "I know you've been searching for TS tutorials online. But, still can't figure out how to get started? I got you! 🤛"
 tags: ["TypeScript", "Introduction", "Programming"]
 backgroundImage: "/content/thumbnails/the-only-typescript-intro-that-you-need.jpg"
-isDraft: true
 ---
 
 import { Image } from "astro:assets";
 import { Code } from "astro:components";
 import InfoCard from "../../sharedComponents/InfoCard.astro";
 import Collapsible from "../../sharedComponents/Collapsible/Collapsible.tsx";
+import Tooltip from "../../sharedComponents/Tooltip.tsx";
 
 ## [Can't find good tutorials?](#cant-find-good-tutorials)
 
@@ -28,78 +28,401 @@ and you're now wondering at how TypeScript can help you.
 
 ## [The starting point](#the-starting-point)
 
-There's no special thing about TypeScript. It's more accurate to say, that JavaScript is lacking or
-incomplete when it comes to building complex projects. Sure, you can build complex projects using only JavaScript. But, to make the **codebase
-maintainable** and your **mental health "healthy"** 😜, JavaScript alone is not enough.
+<Image
+  src="/content/images/ts-flashlight.jpg"
+  class="w-full rounded-lg"
+  width={670}
+  height={670}
+  alt={"TypeScript sheds light to what's possible"}
+/>
 
-There's two (2) things where TypeScript is really good at, that really speeds up development time ⚡️.
+There's no special thing about TypeScript. It's more accurate to say, that JavaScript is lacking or
+incomplete when it comes to building complex projects. Sure, you can build complex projects using 
+only JavaScript. But, to make the **codebase maintainable** and your **mental health "healthy"** 😜, 
+JavaScript alone is not enough. It's only when you use TypeScript, that you can see what's possible.
+Let's have the example code below.
+
+<Code
+  class="not-prose text-base"
+  code={`
+    // JS version
+    function formatPrice(price, options) {
+      // logic here
+    }
+
+    // TS version
+    function formatPrice(
+      price: number // 👈 extra code,
+      options: { 
+        withoutTag?: boolean         // 👈 extra code; 
+        withoutDecimals?: boolean    // 👈 extra code; 
+      }                         
+    ) {
+      // logic here
+    }
+  `}
+  lang="js"
+/>
+
+Those extra codes you added are what we called **types**. Types enhance developer experience as
+you can get suggestions and code autocompletion from your IDE ⚡️.
+
+<Image
+  src="/content/gifs/ts-autocomplete.gif"
+  class="w-full rounded-lg -mb-[1px]"
+  width={670}
+  height={670}
+  alt={"VS Code's intellisense and autocompletion"}
+/>
+<div class="text-sm mt-2">
+  - _Typical dev experience with TypeScript_ 🔥
+  - _Look at the errors I'm getting when I'm not using the function correctly_ 🚫
+</div>
+
+<Image
+  src="/content/gifs/js-no-autocomplete.gif"
+  class="w-full rounded-lg -mb-[1px]"
+  width={670}
+  height={670}
+  alt={"VS Code's intellisense and autocompletion"}
+/>
+<div class="text-sm mt-2">
+  - _Now the typical dev experience with JavaScript_ 🫤
+  - _I could be getting errors but I still have no idea. I guess we'll figure it out when it's on production_ 🫤
+</div>
+
+
+There's two (2) things where TypeScript is really good at, that will also speed up your development time ⚡️.
 
 - _Helping you catch bugs early._
 - _Helping you make big changes in the codebase very easily._
 
-What about the trade offs? Just additional tooling setup
-and additional code to write 🤷‍♂️. Well, for complex projects, especially with a team of developers working
-on it, the trade offs really can't outweigh the benefits.
+So, now are you ready? Let's setup TypeScript!
 
 ## [What are you building? - Setting up TypeScript](#what-are-you-building---setting-up-typescript)
 
-<img
+<Image
   src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHc3ZGtpaGQ2d3Q4M3A2MHRlcXc5b2t3aGpsbjl5eDkyYzVsZmdiaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2JefoeLtGpPpf7c4/giphy.gif"
   class="w-full rounded-lg"
+  width={670}
+  height={670}
+  alt={"Simson reference gif"}
 />
 
 <InfoCard
   text="
 This time, I will assume that you are building more complex projects that has lots of JavaScript invloved.
-web apps that are rich in client-side interactions or maybe data fetching
+Web apps that have many client-side interactions or data fetching.
 "
 />
 
-For every type of project you want to do, there are different ways you can
-learn, setup, and use TypeScript. But, regardless of type of project you are building,
-the requirements for using TypeScript are the following:
+For every type of project you want to do, there are different ways you can setup TypeScript. 
+But, regardless of type of project you are building, the requirements for using TypeScript 
+is going to be the same:
 
-- A TypeScript compiler (tsc) or other transpilers that converts TypeScript files to JavaScript
+- A TypeScript compiler (tsc) or other transpilers that convert TypeScript files to JavaScript
   files such as [esbuild (20~30x faster than tsc)](https://esbuild.github.io/),
   [Babel](https://babeljs.io/), or [swc](https://swc.rs/docs/getting-started)
-- Installation of <Code class="not-prose" lang="js" inline code={`typescript`}/> package for
-  type checking _(this will install <Code class="not-prose" lang="js" inline code={`tsc`}/> too)_
+- Installation of <span class="not-prose">`typescript`</span> package for
+  type checking _(this will install <span class="not-prose">`tsc`</span> too)_
 - [Node.js](https://nodejs.org/en/download/package-manager) for installation of the said packages.
 
-<Collapsible client:load>
+<Collapsible client:visible initiallyClose>
   <Collapsible.Trigger label="Plain stack web application (HTML, CSS, JS):" />
   <Collapsible.Content  class="primary border-x px-4 font-normal not-italic">
   To use TypeScript on your plain stack web application
 
 1. Make sure you have Node.js in your machine - [download here](https://nodejs.org/en/download/package-manager)
-2. In your project's root directory, initialize <Code class="not-prose" inline code={`package.json`}/> file
+2. In your project's root directory, initialize <span class="not-prose">`package.json`</span> file
 
-   - <Code class="not-prose" code={`npm init -y`} inline />
+   - <span class="not-prose">`npm init -y`</span> 
 
 3. Install TypeScript
 
+   - <span class="not-prose">`npm install typescript --save-dev`</span>
+
+4. Initialize <span class="not-prose">`tsconfig.json`</span>  file
+
+   - <span class="not-prose">`npx tsc --init`</span>
+
+5. Starting from now, instead of writing codes in JavaScript  <span class="not-prose">`.js`</span>
+files, you're going to write in TypeScript  <span class="not-prose">`.ts`</span>
+files. So, go ahead and create your first  <span class="not-prose">`.ts`</span> file.
    - <Code
        class="not-prose"
-       code={`npm install typescript --save-dev`}
-       inline
+       code={`
+        // 🗂️ main.ts
+        window.onload = (e: Event) => { 
+          // do something
+        }
+      `}
+       lang="ts"
      />
 
-4. Initialize <Code class="not-prose" code={`tsconfig.json`} inline /> file
-   - <Code class="not-prose" code={`npx tsc --init`} inline />
+6. Using  <span class="not-prose">`tsc`</span>, compile your TypeScript  <span class="not-prose">`.ts`</span> file to 
+JavaScript  <span class="not-prose">`.js`</span>
+   -  <span class="not-prose">`npx tsc`</span>
+   -  <span class="not-prose">`npx tsc --watch`</span> (_automatically recompile your code when you make changes_)
+
+7. You should see a  <span class="not-prose">`main.js`</span> being created. <Tooltip client:visible trigger={"You may notice how the generated syntax is different."} content={"In your tsconfig.json, The target property specifies the version of ECMAScript that the TypeScript compiler (tsc) will target when generating JavaScript output."} />
+  
+   - <Code
+       class="not-prose"
+       code={`
+        // 🗂️ main.js
+        "use strict";
+        window.onload = (e) => {
+          // do something
+        };
+
+      `}
+       lang="js"
+     />
+
+6. Same goes if you already have JavaScript <span class="not-prose">`.js`</span> files.
+You can start converting them to TypeScript <span class="not-prose">`.ts`</span> files and run  
+<span class="not-prose">`npx tsc`</span> to compile them to <span class="not-prose">`.js`</span> files
+
+   - <Code
+       class="not-prose text-base"
+       code={`
+        // add.js
+        function add (num1, num2) {
+          return num1 + num2
+        }
+        👇👇👇
+        // add.ts
+        function add(num1: number, num2: number): number {
+          return num1 + num2;
+        }
+
+
+        // index.js
+        window.onload = (e) => { 
+          // do something
+        }
+        👇👇👇
+        // index.ts
+        window.onload = (e: Event) => {
+          // do something
+        };
+
+      `}
+       lang="js"
+     />
+
+
 
  </Collapsible.Content>
 </Collapsible>
 
-<Collapsible client:load initiallyClose>
+<Collapsible client:visible initiallyClose>
   <Collapsible.Trigger label="Framework-powered web applications (React, Next.js, AstroJS, Angular):" />
-  <Collapsible.Content class="primary border-x px-4 font-normal not-italic">
-    The simplest way you can setup TypeScript is by installing the compiler
+  <Collapsible.Content class="primary border-x px-4 font-normal not-italic">  
+  A lot of modern web frameworks, during setup, prompts you if you want to use TypeScript. 
+  Modern web frameworks also make sure you are doing best practices when using TypeScript.
 
-  <Code class="not-prose" code={`const foo = 'bar';`} lang="js" inline />
+  _Setting up Next.js w/ TypeScript_
+      - <Image
+          src="/content/images/next-ts-cli.png"
+          class="w-full rounded-lg -mt-3"
+          width={670}
+          height={670}
+          alt={"Next cli setup"}
+        />
+
+  _Setting up React (via Vite) w/ TypeScript_
+      - <Image
+          src="/content/images/vite-react-ts-cli.png"
+          class="w-full rounded-lg -mt-3"
+          width={670}
+          height={670}
+          alt={"React (via Vite) cli setup"}
+        />
+
+  A lot easier right? But, what if, **you're not using** these modern web frameworks? No worries,
+  whatever JS web framework you choose (as long as it has support for TypeScript), go to its documentation and find the **_"TypeScript"_** 
+  section. There, you will see the details on how to setup TypeScript manually.
  </Collapsible.Content>
 </Collapsible>
 
-<img
+## [How to learn TypeScript?](#how-to-learn-typescript)
+
+You can start by learning TypeScript's basic types (<span class="not-prose">`number`</span>, 
+<span class="not-prose">`string`</span>, <span class="not-prose">`boolean`</span>, 
+<span class="not-prose">`array`</span>, <span class="not-prose">`object`</span>, 
+<span class="not-prose">`null`</span>, <span class="not-prose">`undefined`</span>). You're probably
+already familiar with them unless you're completely new to programming. 
+
+Now you can start specifying the types of your **variables**, function **parameters** and **return values**.
+
+<Code
+  class="not-prose text-base"
+  code={`
+    // Syntax #1: colon ":"
+    let firstName: string = 'Jane';
+    let yearsOld: number = 25;
+
+    // Syntax #2: "as"
+    let lastName = 'Oolah' as string;
+    let favoriteColors = ["Red", "Blue"] as string[];
+
+    let ids: number[] = [101, 102, 103]; 
+    let ids: Array<number> = [101, 102, 103]; // This works too!
+
+
+    //       typing the parameter   typing the parameter          
+    //                 👇            👇           👇  typing the return value  
+    function greet(name: string, age: number): string {
+        return \`Hello, \${name}!\`;
+    }
+
+    //       typing the parameter   typing the parameter          
+    //                 👇            👇           👇  typing the return value    
+    const greet = (name: string, age: number): string => {
+      return \`Hello, \${name}!\`;
+    };
+
+    // Typing a more complex data structure (e.g. Objects or array of objects)     
+    type User = {
+      id: string;
+      name: string;
+      age: number;
+      favoriteColors: string[] // Array<string> works too!
+    };
+
+    //  Typing an object
+    //        👇
+    const user: User = {
+      id: "aBVX26jl2328",
+      name: 'Alice',
+      age: 22,
+      favoriteColors: ["Red", "Black"]
+    }
+
+    //  Typing an array of objects. Array<User> works too!
+    //        👇
+    const users: User[] = [
+      {
+        id: "aBVX26jl2328",
+        name: 'Alice',
+        age: 22,
+        favoriteColors: ["Red", "Black"]
+      },
+      {
+        id: "lTOJ51am5113",
+        name: 'Paul',
+        age: 20,
+        favoriteColors: ["Green", "Blue"]
+      }
+    ]
+
+    //     You can also use the type User here or to other values
+    //                    👇
+    function printUser(user: User): string {
+      console.log(\`Name: \${person.name}, Age: \${person.age}\`);
+    }
+  `}
+  lang="js"
+/>
+
+<div class="text-base">_Not that hard right? You're just typing a colon_ "**:**", or "as", _followed 
+by the type you want to specify_</div>
+
+But, uh oh, hold on! ✋. This is **not** how you use TypeScript correctly. You're just **unnecessarily** writing 
+more codes if you **explicitly declaring** types everywhere 😩. TypeScript is smart enough to figure out the type of the value you just 
+declared and carry that type to other places (we call this [type inference](https://medium.com/@sahil90085/typescript-type-inference-a-comprehensive-guide-40c888c6d78f)). 
+Now, this is where you should focus when learning TypeScript!
+
+
+### [Type inference](#type-inference)
+
+_Just remember, you don't need to declare types all the time_ 😊.
+
+<Code
+  class="not-prose text-base"
+  code={`
+    // Example 1: Type inference with primitives
+    let name = 'Alice'; 
+    let age = 30; 
+
+    // infers 'name' as type 'string'
+    console.log(name.toUpperCase()); // Has string methods ✅
+
+    // infers 'age' as type 'number'
+    console.log(age.toFixed(2)); // Has number methods ✅
+    
+
+
+    // Example 2: Type inference with arrays and objects
+    let numbers = [1, 2, 3]; 
+    let person = { name: 'Bob', age: 25 };
+
+    console.log(numbers.map(n => n * 2)); // Valid array of numbers ✅
+    console.log(person.name.toUpperCase()); // person.name is a valid string with string methods ✅   
+  `}
+  lang="js"
+/>
+
+Let's have a more real-world examples 🙂
+
+<Code
+  class="not-prose text-base"
+  code={`
+    // main.ts
+
+    type User = {
+      id: string;
+      name: string;
+      age: number;
+    };
+
+    // Function to fetch users from an API
+    const fetchUsers = async () => {
+      const response = await fetch(\`/api/users\`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch users");
+      }
+      // This is the only time we explicitly type a value
+      const userData: User[] = (await response.json()); 
+      // const userData = (await response.json()) as User[]; // this works too!    
+
+      return userData; 
+    };
+
+    // fetchUsers() returns Promise<User[]> 
+    fetchUsers().then((data) => {
+      const users = data; // infers 'data' as type 'User[]'
+
+      const usersAge = users.map((user) => user.age);
+
+      console.log(usersAge) // usersAge has a type of number[]
+    })
+  `}
+  lang="js"
+/>
+
+
+## [Conclusion](#conclusion)
+
+You have learned that TypeScript's type system allows you to **detect errors ahead of time** and 
+provide **better dev experience**, making it possible for you to make big changes in your codebase
+very easily and quickly 👌⚡️. 
+
+When **setting up TypeScript**, it depends on the project you're building.
+You can install the needed packages and configure TypeScript manually or if you're using web frameworks 
+(React, Next.js, AstroJS, Angular), they usually have built-in TypeScript support.
+
+When **learning TypeScript**, once you have grasp the basic types, you don't need to explicitly type every
+values (variables, parameters, return values). By using type inference, you can just focus on the 
+logic and structure of your code rather than writing unnecessary boilerplate codes.
+
+
+<Image
   src="https://t4.ftcdn.net/jpg/06/35/85/91/360_F_635859130_xWZAC4neov0dVk1mXqDhpJUdcp5M4hki.jpg"
   class="w-full rounded-lg"
+  width={670}
+  height={670}
+  alt={"A master bowing"}
 />
+
