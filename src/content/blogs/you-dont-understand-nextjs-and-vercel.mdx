@@ -1,0 +1,132 @@
+---
+title: "You Don't Understand NextJS (and most likely Vercel too)"
+pubDate: 2024-08-05
+description: "Do you hate NextJS and/or Vercel? Then, you probably don't understand these tools"
+tags: ["NextJS", "Vercel", "Frontend", "Modern tools", Programming]
+backgroundImage: "/content/thumbnails/you-dont-understand-nextjs-and-vercel.png"
+isDraft: true
+---
+
+import { Image } from "astro:assets";
+import { Code } from "astro:components";
+import InfoCard from "../../sharedComponents/InfoCard.astro";
+import Collapsible from "../../sharedComponents/Collapsible/Collapsible.tsx";
+import Tooltip from "../../sharedComponents/Tooltip.tsx";
+
+## [I know why you hatin'](#i-know-why-you-hatin)
+<Image
+  src="https://c.tenor.com/PpsywoMJNWIAAAAC/tenor.gif"
+  class="w-full rounded-lg -mb-[1px]"
+  width={670}
+  height={670}
+  alt={"A gif for haters"}
+/>
+
+The hate for NextJS and/or Vercel usually comes from developers who don't actually know what
+problems these tools solve. Well, I don't really blame them, as I was once a hater, before
+I fully understand what Vercel is trying to solve. 
+
+All you need to do, before you start hating on NextJS again, is **ask your self a question**...
+
+## [When do you really need to use NextJS?](#when-do-you-really-need-to-use-nextjs)
+
+Guess what? You don't need to force NextJS onto a project where it's not a good fit.
+Now, how can you determine if you'll **benefit from using** NextJS or it's just going 
+to **make everything complicated?**  
+
+<InfoCard
+  text="Since we're talking about NextJS here, I'll assume you've already built some 
+  apps/sites with React or at least, you're already familiar with it."
+/>
+
+### 🚫 You don't need NextJS if... 
+- **You're building static or simple sites**: Clearly, (HTML|CSS|JS) is enough for static
+sites. Even when your site needs a little bit of dynamic features, tools like 
+[Astro](https://astro.build/) or [Gatsby](http://gatsbyjs.org) is more appropriate than NextJS. 
+
+- **You haven't used React (or other component-based UI framework)**: The truth is, devs who 
+enjoy using NextJS, also love building their UIs with React! The composability of React is 
+what makes it great, however, its greatness is limited to client-side environemnt only. 
+If only, there's a way to bring React's composability on server environment? 🤔 ifykyk lol.
+
+### 🟠 You probably need NextJS if... 
+- **You're building apps with React**: If you're not sure whether your little app will stay
+as it is now, or soon, will be having more features. It's just a matter of time, trust me. 
+You're going to need ways to handle data fetching, user auth, real-time updates, or maybe 
+you realize you need to do SEO. The complexity of these features will start to affect 
+React's composability that can result to a messy codebase if you don't know what 
+you're doing.
+
+### ✅ You really need NextJS if... 
+- **You want to ship features, not build an infrastructure**: Vercel goal is to let devs 
+focus on shipping features while enjoying the DX their tools provide. Starting from NextJS, 
+which took React at its best, by not making our codebase complicated once we start adding 
+features that works best if you have access to server environment (ex. _data fetching_, _user auth_, _SSR for dynamic contents_, etc.).
+Additionally, Vercel offers a **no-config way deployments** for your apps. Imagine 
+just importing your project's repository and after few clicks, BOOM! App is instantly 
+deployed (with CI/CD already configured). 
+
+## [NextJS and Vercel in details](#nextjs-and-vercel-in-details)
+<Image
+  src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWFobWgzN211d2ZpcjEzMDBtanV6dzE1Z3QzNXp1cW95bHI3ZDN3dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QGPJkA3FrYjyqUrVmS/giphy.gif"
+  class="w-full rounded-lg"
+  width={670}
+  height={670}
+  alt={"The good, the bad, and the ugly gif"}
+/>
+
+Let's dive a little deeper on how NextJS and Vercel actually works together. This will allow
+us to understand these tools really well and start making better decisions. But first, a 
+little bit of history is needed to prepare you for the deep dive 🌊.
+
+Previously, when developing complex web applications we're only bound to choose between two (2)
+approaches. Either you do client-side rendering (SPA) or you do server-side rendering (SSR).
+Both have pros and cons, but, what we've learned after years of struggling to choose between 
+these two approach are... 
+- Isn't it nice to have access to both client-side and server-side environment when 
+developing our applications. Yes! A **hybrid approach!** 
+- No matter which approach I choose, I'll always develop my UIs **using React!** (or maybe
+other component-based UI frameworks).
+
+Now, it makes sense why NextJS easily became one of the most popular frameworks. 
+It's not just a hype, NextJS literally makes our dreams come true. So, let's dive-in deep on 
+how NextJS and Vercel provides the best DX for developing and managing our complex web 
+applications. Starting off with..
+
+{/* But, let me warn you first, with great power comes with great responsibility.  */}
+
+{/* Now, . Let's now dive-in deep on how NextJS does this, 
+but, I'll focus more on NextJS 14 (where they introduced the App router and React Server Components). 
+Because I think, the DX before NextJS 14 was really not great. */}
+
+### NextJS giving React an access to server 
+- Before the introduction of React Server Components (RSC), NextJS  offers 
+<span class="not-prose">`getServerSideProps`</span>, 
+<span class="not-prose">`getStaticProps`</span>, 
+and <span class="not-prose">`getStaticPaths`</span> for accessing the server environment. 
+- Now, with NextJS App router + RSC, you don't have to worry about non-React ways just
+to have an access to the server because, by default, all of your components are rendered
+on the server.
+
+- <a href="https://www.youtube.com/watch?v=9CN9RCzznZc" target="_blank">This talk from Sam</a> 
+explains how rendering React on the server makes developing complex UIs feels like 
+you're just building a lego 🧩. 
+
+### 
+
+
+{/* - Vercel has this thing called [framework-defined infrastructure](https://vercel.com/blog/framework-defined-infrastructure#what-is-framework-defined-infrastructure). */}
+
+
+
+
+## [Conclusion](#conclusion)
+
+<Image
+  src="https://t4.ftcdn.net/jpg/06/35/85/91/360_F_635859130_xWZAC4neov0dVk1mXqDhpJUdcp5M4hki.jpg"
+  class="w-full rounded-lg"
+  width={670}
+  height={670}
+  alt={"A master bowing"}
+/>
+
