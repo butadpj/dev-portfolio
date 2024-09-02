@@ -26,7 +26,7 @@ The hate for NextJS and/or Vercel usually comes from developers who don't actual
 problems these tools solve. Well, I don't really blame them, as I was once a hater, before
 I fully understand what Vercel is trying to solve. 
 
-All you need to do, before you start hating on NextJS again, is **ask your self a question**...
+All you need to do, before you start hating on these tools again, is **ask your self a question**...
 
 ## [When do you really need to use NextJS?](#when-do-you-really-need-to-use-nextjs)
 
@@ -40,9 +40,10 @@ to **make everything complicated?**
 />
 
 ### 🚫 You don't need NextJS if... 
-- **You're building static or simple sites**: Clearly, (HTML|CSS|JS) is enough for static
-sites. Even when your site needs a little bit of dynamic features, tools like 
-[Astro](https://astro.build/) or [Gatsby](http://gatsbyjs.org) is more appropriate than NextJS. 
+- **You're building static or simple sites**: Clearly, HTML, CSS, and JS is enough for static
+sites. Even when your site needs a little bit of dynamic features and maybe you want to have some
+structure on your codebase, tools like [Astro](https://astro.build/) or [Gatsby](http://gatsbyjs.org) 
+are more appropriate than NextJS. 
 
 - **You haven't used React (or other component-based UI framework)**: The truth is, devs who 
 enjoy using NextJS, also love building their UIs with React! The composability of React is 
@@ -62,11 +63,11 @@ you're doing.
 focus on shipping features while enjoying the DX their tools provide. Starting from NextJS, 
 which took React at its best, by not making our codebase complicated once we start adding 
 features that works best if you have access to server environment (ex. _data fetching_, _user auth_, _SSR for dynamic contents_, etc.).
-Additionally, Vercel offers a **no-config way deployments** for your apps. Imagine 
-just importing your project's repository and after few clicks, BOOM! App is instantly 
-deployed (with CI/CD already configured). 
+Additionally, when you get to deployments, Vercel allows developers to have _infrastructureless_ code. Imagine being able to deploy
+your app in just a few clicks and not worry about making your infrastructure high-performant, scalable,
+and secured. All of that DevOps stuffs is being taken care of Vercel.
 
-## [NextJS and Vercel in details](#nextjs-and-vercel-in-details)
+## [NextJS and Vercel in detail](#nextjs-and-vercel-in-detail)
 <Image
   src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWFobWgzN211d2ZpcjEzMDBtanV6dzE1Z3QzNXp1cW95bHI3ZDN3dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QGPJkA3FrYjyqUrVmS/giphy.gif"
   class="w-full rounded-lg"
@@ -88,10 +89,10 @@ developing our applications. Yes! A **hybrid approach!**
 - No matter which approach I choose, I'll always develop my UIs **using React!** (or maybe
 other component-based UI frameworks).
 
-Now, it makes sense why NextJS easily became one of the most popular frameworks. 
-It's not just a hype, NextJS literally makes our dreams come true. So, let's dive-in deep on 
-how NextJS and Vercel provides the best DX for developing and managing our complex web 
-applications. Starting off with..
+Now, it makes sense why NextJS easily became one of the most popular frameworks. It's not 
+just hype, it's just NextJS makes it very for us to mix-and-match different approaches on 
+serving our pages. So, let's dive-in deep on how NextJS and Vercel provides the best DX for 
+developing and managing web applications. Starting off with..
 
 {/* But, let me warn you first, with great power comes with great responsibility.  */}
 
@@ -104,23 +105,61 @@ Because I think, the DX before NextJS 14 was really not great. */}
 <span class="not-prose">`getServerSideProps`</span>, 
 <span class="not-prose">`getStaticProps`</span>, 
 and <span class="not-prose">`getStaticPaths`</span> for accessing the server environment. 
+_Not really a fan of these as it breaks everything I love about React (the composability and 
+data encapsulation of components)_.
+
 - Now, with NextJS App router + RSC, you don't have to worry about non-React ways just
-to have an access to the server because, by default, all of your components are rendered
+to have an access to the server, because, by default, all of your components are rendered
 on the server.
 
 - <a href="https://www.youtube.com/watch?v=9CN9RCzznZc" target="_blank">This talk from Sam</a> 
-explains how rendering React on the server makes developing complex UIs feels like 
+explains how rendering React components on the server makes developing complex UIs feels like 
 you're just building a lego 🧩. 
 
-### 
+### Vercel's framework-defined infrastructure
+<Image
+  src="/content/images/next-build-output.png"
+  class="w-full rounded-lg"
+  width={670}
+  height={670}
+  alt={"Screenshot of NextJS build output"}
+/>
 
+- NextJS' predictable pattern of marking a page to be rendered on client or server, or even 
+generating it on build time, can be mapped on to appropriate infrastructure. The framework is 
+flexible enough to support all these approach of serving the pages, unfortunately, there's a 
+price for too much flexibility, and that's going to be **a very complicated infrastructure**.
 
-{/* - Vercel has this thing called [framework-defined infrastructure](https://vercel.com/blog/framework-defined-infrastructure#what-is-framework-defined-infrastructure). */}
+- Vercel combines different cloud services such as static file service, API gateway, serverless, 
+and other more to achieve this whole framework-defined infrastructure. The result? Huge smiles 
+from developers because they don't have to worry about making their infrastructures high-performant,
+scalable, and secure - a truly _infrastructureless_. 
 
+### The ugly parts
 
+Let's start off with the obvious ones. 
 
+- **Vendor locked-in**: At the time of writing, the only platform I trust for having 
+_infrastructureless_  code are **Vercel**, **AWS Amplify**, and **Netlify** 
+(with its Next.js Runtime v5). 
+
+  - _This is going to be your root problem if you use NextJS without planning to have your 
+  infrastructure managed by the platforms I just mentioned above_.
+  - _You can always self-host tho (see 
+  <a href="https://nextjs.org/docs/app/building-your-application/deploying#self-hosting" target="_blank">NextJS self-hosting options</a>), 
+  and take the responsibility of managing and scaling your own infrastructure. I think that's 
+  inevitable once your app starts to have tons of user_. 
 
 ## [Conclusion](#conclusion)
+
+It's easy to hate on NextJS and Vercel if we don't try to understand their purpose. The great DX 
+that comes from these tools has definitely a price to be paid. Those who really want to ship 
+features and not build an infrastructure, I supposed they are ready to pay the price. For those 
+who can't tolerate being vendor locked-in on to limited platforms, you don't have to force yourself
+to use NextJS and hate it because of the problems you'll encounter.
+
+Starting today, let this words from a wise programmer be part of our mantra - 
+"_There's really no solutions for a problem, only tradeoffs_".
 
 <Image
   src="https://t4.ftcdn.net/jpg/06/35/85/91/360_F_635859130_xWZAC4neov0dVk1mXqDhpJUdcp5M4hki.jpg"
