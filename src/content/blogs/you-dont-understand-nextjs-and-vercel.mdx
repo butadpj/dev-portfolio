@@ -1,10 +1,9 @@
 ---
 title: "You Don't Understand NextJS (and most likely Vercel too)"
-pubDate: 2024-08-05
+pubDate: 2024-09-03
 description: "Do you hate NextJS and/or Vercel? Then, you probably don't understand these tools"
 tags: ["NextJS", "Vercel", "Frontend", "Modern tools", Programming]
 backgroundImage: "/content/thumbnails/you-dont-understand-nextjs-and-vercel.png"
-isDraft: true
 ---
 
 import { Image } from "astro:assets";
@@ -23,14 +22,20 @@ import Tooltip from "../../sharedComponents/Tooltip.tsx";
 />
 
 The hate for NextJS and/or Vercel usually comes from developers who don't actually know what
-problems these tools solve. Well, I don't really blame them, as I was once a hater, before
-I fully understand what Vercel is trying to solve. 
+problems these tools solve. Well, I don't really blame them as I have no idea why they decided
+to pick NextJS for their project. Maybe their team is already using it or want to use it. Or most
+likely, they just felt this immense pressure from the community that this new shining object ✨ is
+_"the future"_.
 
-All you need to do, before you start hating on these tools again, is **ask your self a question**...
+Still, I can't figure out how does someone can spend energy hating on something. For me, if the tool 
+doesn't serve me well, I'll just find a better one. Or if it's for work, and I don't have the control
+on what tools I'm going to be using, I'll just suck it up. So, before we start hating on NextJS
+again, it's better to **ask ourselves a question**...
 
 ## [When do you really need to use NextJS?](#when-do-you-really-need-to-use-nextjs)
 
-Guess what? You don't need to force NextJS onto a project where it's not a good fit.
+Guess what? You don't need to force NextJS onto a project where it's not a good fit. _You can tell 
+that to your tech lead or senior : )._
 Now, how can you determine if you'll **benefit from using** NextJS or it's just going 
 to **make everything complicated?**  
 
@@ -47,8 +52,8 @@ are more appropriate than NextJS.
 
 - **You haven't used React (or other component-based UI framework)**: The truth is, devs who 
 enjoy using NextJS, also love building their UIs with React! The composability of React is 
-what makes it great, however, its greatness is limited to client-side environemnt only. 
-If only, there's a way to bring React's composability on server environment? 🤔 ifykyk lol.
+what makes it great. So, if you haven't worked on component-based UI frameworks, the learning
+curve for NextJS is going to be high.
 
 ### 🟠 You probably need NextJS if... 
 - **You're building apps with React**: If you're not sure whether your little app will stay
@@ -94,12 +99,6 @@ just hype, it's just NextJS makes it very for us to mix-and-match different appr
 serving our pages. So, let's dive-in deep on how NextJS and Vercel provides the best DX for 
 developing and managing web applications. Starting off with..
 
-{/* But, let me warn you first, with great power comes with great responsibility.  */}
-
-{/* Now, . Let's now dive-in deep on how NextJS does this, 
-but, I'll focus more on NextJS 14 (where they introduced the App router and React Server Components). 
-Because I think, the DX before NextJS 14 was really not great. */}
-
 ### NextJS giving React an access to server 
 - Before the introduction of React Server Components (RSC), NextJS  offers 
 <span class="not-prose">`getServerSideProps`</span>, 
@@ -132,31 +131,38 @@ price for too much flexibility, and that's going to be **a very complicated infr
 
 - Vercel combines different cloud services such as static file service, API gateway, serverless, 
 and other more to achieve this whole framework-defined infrastructure. The result? Huge smiles 
-from developers because they don't have to worry about making their infrastructures high-performant,
-scalable, and secure - a truly _infrastructureless_. 
+from developers because they don't have to worry about making their infrastructures **high-performant**,
+**scalable**, and **secure** - a truly _infrastructureless_. 
 
 ### The ugly parts
 
-Let's start off with the obvious ones. 
+You can almost see all the ugly parts of NextJS for every article that explains why they won't
+use NextJS (see <a href="https://medium.com/@thecodingteacher_52591/why-nextjs-sucks-0352de93071b" target="_blank">Why NextJS Sucks</a>). 
+So, I want to address the root of every problems you will encounter when you start using NextJS, 
+and that's only being...
 
 - **Vendor locked-in**: At the time of writing, the only platform I trust for having 
 _infrastructureless_  code are **Vercel**, **AWS Amplify**, and **Netlify** 
 (with its Next.js Runtime v5). 
 
   - _This is going to be your root problem if you use NextJS without planning to have your 
-  infrastructure managed by the platforms I just mentioned above_.
-  - _You can always self-host tho (see 
-  <a href="https://nextjs.org/docs/app/building-your-application/deploying#self-hosting" target="_blank">NextJS self-hosting options</a>), 
-  and take the responsibility of managing and scaling your own infrastructure. I think that's 
-  inevitable once your app starts to have tons of user_. 
+  infrastructure managed by the platforms I just mentioned above. As going in to self-hosting route 
+  (see <a href="https://nextjs.org/docs/app/building-your-application/deploying#self-hosting" target="_blank">NextJS self-hosting options</a>), 
+  and taking care of your own infrastructure is definitely not easy, especially for a businesses
+  who prioritize scaling. But for little hobby projects? It's as easy as having a server that 
+  supports NodeJS (and yes, you still have all the features from NextJS)._
 
 ## [Conclusion](#conclusion)
 
 It's easy to hate on NextJS and Vercel if we don't try to understand their purpose. The great DX 
 that comes from these tools has definitely a price to be paid. Those who really want to ship 
-features and not build an infrastructure, I supposed they are ready to pay the price. For those 
-who can't tolerate being vendor locked-in on to limited platforms, you don't have to force yourself
-to use NextJS and hate it because of the problems you'll encounter.
+features and not worry about their infrastructure, I supposed they are ready to pay the price. 
+For those who can't tolerate being vendor locked-in on to limited platforms, let me ask you a 
+question. Are you currently working on production sites/apps that has lots of users? Because, any
+apps that require scaling, also needs someone or a team that's very skilled at DevOps. So, either 
+you stop worrying about scaling and just deploy your NextJS in a simple way (see <a href="https://nextjs.org/docs/app/building-your-application/deploying#self-hosting" target="_blank">NextJS self-hosting options</a>), 
+or be prepared to dive-in to DevOps to avoid being vendor locked-in.
+
 
 Starting today, let this words from a wise programmer be part of our mantra - 
 "_There's really no solutions for a problem, only tradeoffs_".
