@@ -1,0 +1,56 @@
+---
+title: "DevOps Basics for Frontend Developers"
+pubDate: 2024-09-25
+description: "Can someone really learn DevOps by just reading blogs or doing cloud services certifications? I doubt it 🫤"
+tags: ["DevOps", "Nginx", "Redis", "Load Testing", Programming]
+backgroundImage: "/content/thumbnails/devops-for-frontend-devs.png"
+isDraft: true
+---
+
+import { Image } from "astro:assets";
+import { Code } from "astro:components";
+import InfoCard from "../../sharedComponents/InfoCard.astro";
+import Collapsible from "../../sharedComponents/Collapsible/Collapsible.tsx";
+import Tooltip from "../../sharedComponents/Tooltip.tsx";
+
+## [The realization](#the-realization)
+
+<Image
+  src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXRueW14MnlvYjlpcW53Y2d0MGl3eGZ3cHZ4MXR6c2IxMHJpYnFxaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wyyd8d9IPry3qOBW4W/giphy.webp"
+  class="-mb-[1px] w-full rounded-lg"
+  width={670}
+  height={670}
+  alt={"Aang awakening lol"}
+/>
+
+As a front-end developer, I've been appoaching learning DevOps the wrong way. After all,
+my job was to focus on user interfaces, making apps functional, and look beautiful. But there's two (2)
+things I was very wrong at. First, I thought I only need to learn it once I start working on production 
+apps that already have thousands of users. Second, I thought just by doing online courses and cloud 
+services certifications, I can learn DevOps. But no, here's what everyone should realize if they are 
+developing web applications.
+
+- Your web app, specifically the backend where APIs and business logic resides, **is inherintly sluggish 
+during traffic spikes** (multiple users requesting resources at the same time)
+
+- If your goal is to address the slowness of your app, that's a very strong reason to learn some basic 
+DevOps concepts. Now, online courses/certifications are not going to be a huge help here, because **you 
+need to start looking for solutions to a bunch of problems now, not just some roadmaps.** 
+
+The problem is, most of developers haven't seen their web app performing poorly. Most likely, after 
+the development is done, they'll just deploy it on some platform and never experience getting high traffic 
+on their web app. But don't worry, let me show you an easy way for you to experience how slow your app is 😈. 
+
+## [Starting with performance and load testing](#starting-with-performance-and-load-testing)
+
+TO BE CONTINUE...
+
+## [Conclusion](#conclusion)
+
+<Image
+  src="https://t4.ftcdn.net/jpg/06/35/85/91/360_F_635859130_xWZAC4neov0dVk1mXqDhpJUdcp5M4hki.jpg"
+  class="w-full rounded-lg"
+  width={670}
+  height={670}
+  alt={"A master bowing"}
+/>
