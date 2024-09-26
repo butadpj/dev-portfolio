@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/blogs/devops-for-frontend-devs",
+      "destination": "https://dev.butadpj.com/blogs/devops-for-web-devs",
+      "permanent": true
+    }
+  ]
+}
