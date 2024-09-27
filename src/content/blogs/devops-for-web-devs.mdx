@@ -26,7 +26,7 @@ import Tooltip from "../../sharedComponents/Tooltip.tsx";
 As a frontend-focused developer, I've been appoaching learning DevOps the wrong way. After all,
 my job was to focus on user interfaces, making apps functional, and look beautiful. But there's two (2)
 things I was very wrong at. First, I thought I only need to learn it once I start working on production 
-apps that already have thousands of users. Second, I thought just by doing online courses and cloud 
+apps that already have thousands of users. Second, I thought that, just by doing online courses and cloud 
 services certifications, I can learn DevOps. But no, here's what everyone should realize if they are 
 developing web applications.
 
@@ -37,23 +37,65 @@ the slowness of your applications, you have to learn some basic DevOps concepts.
 
 - Online courses/certifications often only provide a lot of theory and instructions on using specific 
 cloud-based tools but lack practical and real-world scenarios. So, you have to waste lots of your time 
-filtering out irrelevant concepts that don't help you on achieving your goal. What's worse is, you don't 
-have any strong reason why you decided to learn DevOps in the first place _(don't be like me pls 😭)_. 
+filtering out irrelevant concepts that don't help you on achieving your goal. But you know what's worse?
+If you don't have any strong reason why you decided to learn DevOps in the first place _(so, don't be like me pls_ 😭). 
 
-But, let's be real here. The problem starts with, developers not seeing performance issues until it's too late. 
-Typically, after the development is done, they'll just deploy it on some platform and never 
-experience getting high traffic on their web app, or, if they do, they are left wondering.. 
-_"Why the server is crashing?"_, _"Why do requests were timing out?"_. So, it's important you learn how to simulate large traffic locally and identifying where your app slows down (whether it's your server, database, or network)
+But, let's be real here. The problem starts with **developers not seeing performance issues until it's too late**. 
+Typically, after the development is done, we will just deploy our app on some platforms and never 
+experience getting high traffic on our web app, or, if we do, we are left wondering.. 
+_"Why the server is crashing?"_, _"Why do requests were timing out?"_. So, it's important for us to learn how to 
+**simulate large traffic locally** and identifying where our app slows down, whether it's our server, database, or network.
 
 ## [Starting with performance and load testing](#starting-with-performance-and-load-testing)
-<InfoCard
-  text="
-For simplicity, I'll assume you have your backend (API endpoints) separate from your frontend.
-"
+
+<InfoCard text="For simplicity, we will only focus on testing backend services or APIs as this is where performance 
+bottlenecks can be found. Poorly optimized queries, resource-heavy processes, or non-scalable infrastructure can cause 
+slow response times or even server crashes under load. "/>
+
+Take a look at the example Express API endpoints below.
+
+<Code
+  class="not-prose text-base mt-4"
+  code={`
+    const express = require('express');
+    const db = require('@utils/db');
+    
+    const router = express.Router();
+
+    router.get('/api/sessions', async (req, res) => {
+      try {
+        const sessions = await db.sessions.findMany({
+          include: {
+            student: true,
+            tutor: true,
+            subject: true,
+          },
+        });
+        res.json(sessions);
+      } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+    });
+
+    router.get('/api/tutors', async (req, res) => {
+      try {
+        const tutors = await db.tutors.findMany({
+            include: {
+              subjects: true,
+            },
+        });        
+        res.json(tutors);
+      } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+    });
+
+    module.exports = router;
+  `}
+  lang="js"
 />
 
-Majority
-
+This is how 
 
 
 ## [Conclusion](#conclusion)
