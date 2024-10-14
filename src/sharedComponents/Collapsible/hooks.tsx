@@ -26,14 +26,13 @@ export function collapsibleLogic(collapsible: HTMLDivElement) {
     } else {
       toggleIconPath?.setAttribute("d", angleDownPath);
       collapsible.classList.add("open");
-      content.style.maxHeight = `${content.scrollHeight}px`;
+      calculateContentHeight(content);
     }
   });
 
   // If collapsible is open initially..
   if (collapsible.classList.contains("open")) {
-    content.style.maxHeight = `${content.scrollHeight}px`;
-
+    calculateContentHeight(content);
     // Bad hack - ensure the toggle icon renders first
     setTimeout(() => {
       const toggleIconPath = trigger
@@ -44,3 +43,17 @@ export function collapsibleLogic(collapsible: HTMLDivElement) {
     }, 0);
   }
 }
+
+const calculateContentHeight = (content: HTMLElement) => {
+  let totalHeight = content.scrollHeight;
+
+  const nestedContents = content.querySelectorAll(".content");
+
+  if (nestedContents.length) {
+    nestedContents.forEach((nestedContent) => {
+      totalHeight += nestedContent.scrollHeight;
+    });
+  }
+
+  content.style.maxHeight = `${totalHeight}px`;
+};
