@@ -82,14 +82,14 @@ some of the basic concepts from DevOps below and see how each can help you.
 
 <Collapsible client:visible>
   <Collapsible.Trigger label="Slow response time" />
-  <Collapsible.Content class="primary border-x px-4 font-normal not-italic text-xl">
+  <Collapsible.Content class="primary border-x px-4 font-normal not-italic">
     <span class="mb-10 block">Common causes: Query repitition (not caching) & Slow DB queries </span>
   
     <Collapsible client:visible>
       
 
       <Collapsible.Trigger label="- Caching" class="italic text-primary" />
-      <Collapsible.Content class="px-4 font-normal not-italic text-xl">
+      <Collapsible.Content class="px-4 font-normal not-italic">
         Writing slow queries is inevitable, and if you can't really do anything to optimize your database, caching can 
         help sidestep some of the inefficienies. With that, we're going to use 
         <a href="https://redis.io/" target="_blank">Redis</a> - a tool often used for caching due to its in-memory speed ⚡️.
@@ -101,12 +101,12 @@ some of the basic concepts from DevOps below and see how each can help you.
         Next, install <a href="https://www.npmjs.com/package/redis" target="_blank">redis (the npm package)</a> on your 
         API server.  
 
-        - <span class="not-prose text-base">`npm install redis`</span>
+        - <span class="not-prose">`npm install redis`</span>
 
         Then, create a single instance of redis (should be outside of your API route handlers)
 
 <Code 
-          class="text-base" 
+           
           code={`// /utils.ts
 import { createClient } from "redis";
 
@@ -124,7 +124,7 @@ export const redis = redisClient;`}
 
         Finally, start caching those slow ahh database queries 😩.
 <Code 
-          class="text-base" 
+           
           code={`import { redis } from "/utils";
 
 router.get('/api/sessions', async (req, res) => {
@@ -163,7 +163,7 @@ router.get('/api/sessions', async (req, res) => {
       the cache as well, so it's in-sync with the data from database.
 
 <Code 
-          class="text-base" 
+           
           code={`// Example route to update a session
 router.put('/sessions/:id', async (req, res) => {
   const { id } = req.params;
@@ -195,7 +195,7 @@ router.put('/sessions/:id', async (req, res) => {
 
     <Collapsible client:visible initiallyClose>
       <Collapsible.Trigger label="- Optimizing DB queries" class="italic text-primary" />
-      <Collapsible.Content class="px-4 font-normal not-italic text-xl">
+      <Collapsible.Content class="px-4 font-normal not-italic">
         For this one, we'll focus on tackling the most notorious issue when querying something from the database - 
         the **n+1 problem.**
 
@@ -203,7 +203,7 @@ router.put('/sessions/:id', async (req, res) => {
         it executes another query to fetch related data (hence the "+1" query for each item).
 
 <Code 
-          class="text-base" 
+           
           code={`// Please don't do this!!
 const sessions = await db.sessions.findMany();
 
@@ -232,7 +232,7 @@ const nPlusOneProblem = await Promise.all(
 
         To fix this, ORMs like Prisma have an easy way for you.
 <Code 
-          class="text-base" 
+           
           code={`// Yay! Fast query!
 
 // If you're using Prisma
@@ -260,12 +260,12 @@ const sessions = await getRepository(Session).find({
 
 <Collapsible client:visible>
   <Collapsible.Trigger label="Server overloading/crashing (CPU or Memory exhaustion)" />
-  <Collapsible.Content class="primary border-x px-4 font-normal not-italic text-xl">
+  <Collapsible.Content class="primary border-x px-4 font-normal not-italic">
     <span class="mb-10 block">Common causes: Single server instance & High volume of traffic (high concurrency)</span>
 
     <Collapsible client:visible>
       <Collapsible.Trigger label="- Containerization" class="italic text-primary" />
-      <Collapsible.Content class="px-4 font-normal not-italic text-xl">
+      <Collapsible.Content class="px-4 font-normal not-italic">
         <InfoCard
           text="I will not get into details of Docker here. What I want to focus is, how it can be used to utilize 
           the server's resources efficiently."
@@ -294,7 +294,7 @@ const sessions = await getRepository(Session).find({
         (must be the exact name).
 
 <Code 
-          class="text-base" 
+           
           code={`services:
   app:                # 👈 change this to your desired service name 
     build:
@@ -324,7 +324,7 @@ const sessions = await getRepository(Session).find({
       needed and call it **"nginx.conf"**. 
 
 <Code 
-          class="text-base" 
+           
           code={`upstream WebPool {
   server app:4000;     # 👈 "app" is the service name you specified in docker-compose.yml 
   server app:4000;     # 👈 PORT should match what you declared in .env file
@@ -348,7 +348,7 @@ server {
 
       Finally, run the command below to start your app.
 
-      - <span class="not-prose text-base">`docker-compose up --build`</span>
+      - <span class="not-prose">`docker-compose up --build`</span>
 
       Once the build is done and your app is ready, you should be able to access it on - http://localhost:9000. 
       Try making some API calls and watch the logs so you can see which of the 3 instances of your app is 
@@ -363,7 +363,7 @@ server {
 
     <Collapsible client:visible initiallyClose>
       <Collapsible.Trigger label="- Load balancing" class="italic text-primary" />
-      <Collapsible.Content class="px-4 font-normal not-italic text-xl">
+      <Collapsible.Content class="px-4 font-normal not-italic">
         To be continued!
       </Collapsible.Content>
     </Collapsible>
