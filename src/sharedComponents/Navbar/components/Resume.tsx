@@ -5,7 +5,7 @@ export default function Resume(props: { class?: string }) {
     <div class="my-resume hoverable">
       <a
         class={`flex items-center gap-2 ${props.class}`}
-        href="./my_resume.pdf"
+        href="./Paul's Resume.pdf"
         download
       >
         My Resume <FaSolidFileArrowDown />
