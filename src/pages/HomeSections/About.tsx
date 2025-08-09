@@ -24,14 +24,14 @@ function About(props: AboutProps) {
         <Collapsible.Content>
           <ul class="flex list-inside list-disc flex-col gap-3">
             <li>
-              3 years of experience in <span>Frontend Development</span>
+              4 years of experience in <span>Frontend Development</span>
             </li>
             <li>
-              2 years of experience in <span>ReactJS</span> and{" "}
+              3 years of experience in <span>ReactJS</span> and{" "}
               <span>UI/UX design</span>
             </li>
             <li>
-              2 years of experience in <span>Backend (API) Development</span>
+              3 years of experience in <span>Backend (API) Development</span>
             </li>
           </ul>
         </Collapsible.Content>
