@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="100" y1="40" x2="1080" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ECFDF5"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <rect x="260" y="92" width="680" height="491" rx="20" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="3"/>
+  <text x="600" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" fill="#0F172A" font-weight="700">
+    Monthly Shopping Audit
+  </text>
+  <text x="600" y="206" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#334155">
+    Q1 Budget Notes
+  </text>
+
+  <line x1="320" y1="250" x2="880" y2="250" stroke="#CBD5E1" stroke-width="3"/>
+  <line x1="320" y1="302" x2="880" y2="302" stroke="#E2E8F0" stroke-width="2"/>
+  <line x1="320" y1="346" x2="880" y2="346" stroke="#E2E8F0" stroke-width="2"/>
+  <line x1="320" y1="390" x2="880" y2="390" stroke="#E2E8F0" stroke-width="2"/>
+  <line x1="320" y1="434" x2="880" y2="434" stroke="#E2E8F0" stroke-width="2"/>
+
+  <text x="340" y="292" font-family="Courier New, monospace" font-size="24" fill="#0F172A">Flowers</text>
+  <text x="860" y="292" text-anchor="end" font-family="Courier New, monospace" font-size="24" fill="#0F172A">24.00</text>
+
+  <text x="340" y="336" font-family="Courier New, monospace" font-size="24" fill="#0F172A">Lattes</text>
+  <text x="860" y="336" text-anchor="end" font-family="Courier New, monospace" font-size="24" fill="#0F172A">26.00</text>
+
+  <text x="340" y="380" font-family="Courier New, monospace" font-size="24" fill="#0F172A">Shopping</text>
+  <text x="860" y="380" text-anchor="end" font-family="Courier New, monospace" font-size="24" fill="#0F172A">59.00</text>
+
+  <text x="340" y="424" font-family="Courier New, monospace" font-size="24" fill="#0F172A">Travel Savings</text>
+  <text x="860" y="424" text-anchor="end" font-family="Courier New, monospace" font-size="24" fill="#0F172A">120.00</text>
+
+  <line x1="320" y1="468" x2="880" y2="468" stroke="#CBD5E1" stroke-width="3"/>
+  <text x="340" y="520" font-family="Courier New, monospace" font-size="28" fill="#0F172A" font-weight="700">TOTAL</text>
+  <text x="860" y="520" text-anchor="end" font-family="Courier New, monospace" font-size="28" fill="#0F172A" font-weight="700">229.00</text>
+</svg>

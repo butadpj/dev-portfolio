@@ -1,0 +1,189 @@
+<div
+  id="valentine-receipt"
+  class="not-prose relative mx-auto my-8 max-w-2xl overflow-hidden rounded-xl border border-rose-300/80 bg-rose-50 p-6 text-rose-950 shadow-sm dark:border-rose-300/40 dark:bg-[#2a1f28] dark:text-rose-100"
+>
+  <div id="cute-burst" class="pointer-events-none absolute inset-0 z-20 overflow-hidden" aria-hidden="true"></div>
+
+  <div
+    class="relative z-10 rounded-lg border border-dashed border-rose-300 bg-white p-5 font-mono text-sm text-rose-900 dark:border-rose-300/50 dark:bg-[#1a1420] dark:text-rose-100"
+  >
+    <div class="text-center text-base font-bold tracking-wide">LOVELY LIFE GENERAL STORE</div>
+    <div class="mb-3 mt-1 text-center text-xs text-rose-700">Date: February 7, 2026</div>
+    <div class="my-3 border-t border-dashed border-rose-300 dark:border-rose-300/60"></div>
+
+    <div class="flex justify-between font-medium text-rose-900 dark:text-rose-100"><span>1x Flowers (always yes)</span><span>24.00</span></div>
+    <div class="flex justify-between font-medium text-rose-900 dark:text-rose-100"><span>4x Latte date moments</span><span>26.00</span></div>
+    <div class="flex justify-between font-medium text-rose-900 dark:text-rose-100"><span>1x Shopping mini spree</span><span>59.00</span></div>
+    <div class="flex justify-between font-medium text-rose-900 dark:text-rose-100"><span>1x Switzerland dream savings</span><span>120.00</span></div>
+
+    <div class="my-3 border-t border-dashed border-rose-300 dark:border-rose-300/60"></div>
+    <div class="flex justify-between font-bold text-rose-900 dark:text-rose-100"><span>TOTAL</span><span>229.00</span></div>
+    <div class="my-3 border-t border-dashed border-rose-300 dark:border-rose-300/60"></div>
+
+    <div class="flex justify-between text-base font-bold text-rose-700">
+      <span>Special item: Be My Valentine?</span>
+      <span>Priceless</span>
+    </div>
+
+    <div class="mt-4 text-center text-xs text-rose-700 dark:text-rose-200">Approval required below</div>
+  </div>
+
+  <div class="relative z-10 mt-5 flex flex-wrap items-center justify-center gap-3">
+    <button
+      id="accept-btn"
+      type="button"
+      class="rounded-full bg-rose-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-rose-700 active:scale-95"
+    >
+      Accept
+    </button>
+    <button
+      id="decline-btn"
+      type="button"
+      class="rounded-full border border-rose-300 bg-white px-5 py-2 text-sm font-semibold text-rose-700 transition hover:bg-rose-100 active:scale-95 dark:border-rose-300/50 dark:bg-[#241a22] dark:text-rose-100 dark:hover:bg-[#2d1f2a]"
+    >
+      Decline
+    </button>
+  </div>
+
+  <p
+    id="receipt-response"
+    class="relative z-10 mt-4 text-center text-sm font-semibold text-rose-800 dark:text-rose-100"
+    aria-live="polite"
+  ></p>
+</div>
+
+<script>
+  import confetti from "canvas-confetti";
+
+  (() => {
+    const root = document.getElementById("valentine-receipt");
+    if (!root) return;
+
+    const acceptBtn = root.querySelector("#accept-btn");
+    const declineBtn = root.querySelector("#decline-btn");
+    const response = root.querySelector("#receipt-response");
+    const cuteBurst = root.querySelector("#cute-burst");
+
+    if (!(acceptBtn instanceof HTMLButtonElement)) return;
+    if (!(declineBtn instanceof HTMLButtonElement)) return;
+    if (!(response instanceof HTMLElement)) return;
+    if (!(cuteBurst instanceof HTMLElement)) return;
+
+    const declineMessages = [
+      "Decline? That's a bold tap. Try again.",
+      "Really? Are you sure sure?",
+      "I respectfully reject your rejection.",
+      "System error: only 'Accept' is supported.",
+      "Naaah, wrong answer. One more try.",
+      "Still decline? That's cute. Tap Accept now.",
+    ];
+
+    let declineCount = 0;
+    let accepted = false;
+
+    const makeCuteBurst = () => {
+      const icons = ["🌸", "🌷", "🌹", "💐", "🩷", "✨"];
+      const total = 18;
+
+      for (let index = 0; index < total; index += 1) {
+        const emoji = document.createElement("span");
+        emoji.textContent = icons[Math.floor(Math.random() * icons.length)];
+        emoji.className = "cute-emoji";
+        emoji.style.left = `${6 + Math.random() * 88}%`;
+        emoji.style.animationDelay = `${Math.random() * 160}ms`;
+        emoji.style.animationDuration = `${2200 + Math.random() * 800}ms`;
+        cuteBurst.appendChild(emoji);
+      }
+
+      window.setTimeout(() => {
+        cuteBurst.textContent = "";
+      }, 3200);
+    };
+
+    const launchConfetti = () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      confetti({
+        particleCount: 150,
+        spread: 100,
+        startVelocity: 45,
+        origin: { x: 0.5, y: 0.65 },
+      });
+
+      const end = Date.now() + 1100;
+
+      const frame = () => {
+        confetti({
+          particleCount: 7,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+        });
+        confetti({
+          particleCount: 7,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      };
+
+      frame();
+    };
+
+    acceptBtn.addEventListener("click", () => {
+      if (accepted) return;
+      accepted = true;
+
+      response.textContent = "YES RECEIVED. Best checkout ever. I love you.";
+      response.className =
+        "mt-4 text-center text-sm font-semibold text-emerald-700 dark:text-emerald-300";
+
+      acceptBtn.disabled = true;
+      declineBtn.disabled = true;
+      acceptBtn.classList.add("opacity-70", "cursor-not-allowed");
+      declineBtn.classList.add("opacity-60", "cursor-not-allowed");
+
+      launchConfetti();
+      makeCuteBurst();
+    });
+
+    declineBtn.addEventListener("click", () => {
+      if (accepted) return;
+      declineCount += 1;
+      const messageIndex = Math.min(declineCount - 1, declineMessages.length - 1);
+      response.textContent = `${declineMessages[messageIndex]} (${declineCount}x)`;
+      response.className =
+        "mt-4 text-center text-sm font-semibold text-rose-800 dark:text-rose-100";
+    });
+  })();
+</script>
+
+<style>
+  .cute-emoji {
+    position: absolute;
+    bottom: -10%;
+    font-size: 1.5rem;
+    opacity: 0;
+    animation-name: float-cute;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes float-cute {
+    0% {
+      transform: translate3d(0, 0, 0) scale(0.9) rotate(0deg);
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, -110vh, 0) scale(1.18) rotate(28deg);
+      opacity: 0;
+    }
+  }
+</style>

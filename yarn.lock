@@ -1619,6 +1619,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/canvas-confetti@npm:^1":
+  version: 1.9.0
+  resolution: "@types/canvas-confetti@npm:1.9.0"
+  checksum: 10c0/ffe2c674d466b8e13472c81ab2a97056f3433fd40a3513dbc1bb76764e4e7c3ff0a2a58d37b16ea6a245c831077c553db321b069dda6572eab59f2be61137b2e
+  languageName: node
+  linkType: hard
+
 "@types/cookie@npm:^0.6.0":
   version: 0.6.0
   resolution: "@types/cookie@npm:0.6.0"
@@ -2258,6 +2265,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"canvas-confetti@npm:^1.9.3":
+  version: 1.9.4
+  resolution: "canvas-confetti@npm:1.9.4"
+  checksum: 10c0/08f11b5fa20b365922108828d7488f9b3eac2afdf39bc478339268c1250b5215df82682d7074520a3f0f72f4728f9703bbc937dcfe793f196b44e6e8ac0b1f7b
+  languageName: node
+  linkType: hard
+
 "ccount@npm:^2.0.0":
   version: 2.0.1
   resolution: "ccount@npm:2.0.1"
@@ -2570,8 +2584,10 @@ __metadata:
     "@kobalte/core": "npm:^0.13.4"
     "@kobalte/tailwindcss": "npm:^0.9.0"
     "@tailwindcss/typography": "npm:^0.5.13"
+    "@types/canvas-confetti": "npm:^1"
     astro: "npm:4.10.0"
     butter-es6: "npm:^1.0.2"
+    canvas-confetti: "npm:^1.9.3"
     prettier: "npm:^3.1.0"
     prettier-plugin-astro: "npm:^0.12.1"
     prettier-plugin-tailwindcss: "npm:^0.5.7"

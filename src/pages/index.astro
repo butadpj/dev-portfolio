@@ -12,7 +12,9 @@ import Learn from "./HomeSections/Learn";
 import { getCollection } from "astro:content";
 
 const projects = await getCollection("projects");
-const blogs = await getCollection("blogs");
+const blogs = (await getCollection("blogs"))
+  .filter((blog) => !blog.data.isDraft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <Layout title="butadpj - I am a Developer.">
