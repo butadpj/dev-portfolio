@@ -1,0 +1,42 @@
+---
+import { FiArrowUpRight, FiArrowUp } from "solid-icons/fi";
+import { profile } from "../data/portfolio";
+import { buttonVariants } from "./ui/button";
+const year = new Date().getFullYear();
+---
+
+<footer id="contact" class="site-footer">
+  <div class="site-container">
+    <div class="contact-top">
+      <div>
+        <p class="eyebrow">Have something in mind?</p><h2>
+          Let's build<br />something useful<span>.</span>
+        </h2><a class="contact-email" href={`mailto:${profile.email}`}
+          >{profile.email} <FiArrowUpRight aria-hidden="true" /></a>
+      </div><div class="contact-aside">
+        <p>
+          AI systems, interesting problems,<br />or just a good conversation.
+        </p><a
+          class={buttonVariants({ variant: "outline" })}
+          href={profile.resume}
+          download>Grab my resume <FiArrowUpRight aria-hidden="true" /></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        © {year} butadpj <span class="footer-location"
+          >/ {profile.location}</span>
+      </p><nav aria-label="Social links">
+        {
+          profile.socials.map((social) => (
+            <a href={social.href} target="_blank" rel="noreferrer">
+              {social.label}
+              <FiArrowUpRight aria-hidden="true" />
+            </a>
+          ))
+        }
+      </nav><a href="#main-content" class="back-to-top" aria-label="Back to top"
+        ><FiArrowUp aria-hidden="true" /></a>
+    </div>
+  </div>
+</footer>

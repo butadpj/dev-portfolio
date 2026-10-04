@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { FiArrowUpRight } from "solid-icons/fi";
+import { calculateReadingTime, formatDate } from "../../utils";
+interface Props {
+  blogs: CollectionEntry<"blogs">[];
+}
+const { blogs } = Astro.props;
+---
+
+<section
+  class="site-container section-space"
+  id="learn"
+  aria-labelledby="writing-title"
+>
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow section-index">03 / Notes from the process</p><h2
+        id="writing-title"
+      >
+        Things I had to learn.
+      </h2>
+    </div><p>Written down, in case<br />they help someone else.</p>
+  </div>
+  <div class="writing-list">
+    {
+      blogs.map(({ data, slug, body }, index) => (
+        <article class="writing-item">
+          <a href={`/blogs/${slug}/`}>
+            <>
+              <span class="writing-number" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div class="writing-copy">
+                <>
+                  <div class="writing-meta">
+                    <>
+                      <time datetime={data.pubDate.toISOString()}>
+                        {formatDate(data.pubDate)}
+                      </time>
+                      <span aria-hidden="true">/</span>
+                      <span>{calculateReadingTime(body)} min read</span>
+                    </>
+                  </div>
+                  <h3>{data.title}</h3>
+                  <p>{data.description}</p>
+                </>
+              </div>
+              <FiArrowUpRight class="writing-arrow" aria-hidden="true" />
+            </>
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</section>

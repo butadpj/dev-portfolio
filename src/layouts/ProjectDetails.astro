@@ -1,39 +1,24 @@
 ---
 import Layout from "./Root.astro";
 import Navbar from "../sharedComponents/Navbar/Navbar";
-import BackButton from "../sharedComponents/BackButton";
-import Swiper, { type SlideProps } from "../sharedComponents/Swiper";
-import Button from "../sharedComponents/Button";
-import { BsCursorFill, BsGithub } from "solid-icons/bs";
-import MomentumScroll from "../sharedComponents/MomentumScroll/MomentumScroll";
-
-export interface ButtonProps {
-  repoButton: {
-    text: string;
-    url: string;
-  };
-  liveDemoButton?: {
-    text: string;
-    url: string;
-  };
-}
-
-interface Technologies {
-  title: string;
-  description: string;
-}
+import Footer from "../components/Footer.astro";
+import { buttonVariants } from "../components/ui/button";
+import { FiArrowLeft, FiArrowUpRight, FiGithub } from "solid-icons/fi";
+import { formatDate } from "../utils";
 
 interface Props {
   title: string;
   description: string;
   swiperBgImage?: string;
-  swiperSlides?: Array<SlideProps>;
-  tags?: Array<string>;
-  buttons: ButtonProps;
-  technologies: Array<Technologies>;
+  swiperSlides?: Array<{ title: string; description: string }>;
+  tags?: string[];
+  buttons: {
+    repoButton: { text: string; url: string };
+    liveDemoButton?: { text: string; url: string };
+  };
+  technologies: Array<{ title: string; description: string }>;
   pubDate?: Date;
 }
-
 const {
   title,
   description,
@@ -44,123 +29,103 @@ const {
   technologies = [],
   pubDate,
 } = Astro.props;
-
-const url = Astro.request.url;
 ---
 
 <Layout
-  title={`Project - ${title}`}
-  ogMeta={{
-    title: description,
-    url,
-    image: swiperBgImage,
-  }}
+  title={`${title} · Paul John Butad`}
+  description={description}
+  ogMeta={{ image: swiperBgImage }}
 >
   <Navbar client:load />
-  <MomentumScroll client:load>
-    <main class="pb-10 pt-28 md:pt-32">
-      <div class="px-4 md:px-16 lg:px-20">
-        <BackButton className="mb-10" client:load />
-
-        <h2
-          class={`section-title mx-0 pr-20 text-accent relative w-fit font-k2d text-4xl font-bold tracking-wider before:absolute before:left-0 before:top-[28%] before:inline-block before:h-[100%] before:w-[120%] before:-translate-x-1/2 before:bg-accentFade before:content-[""]`}
-        >
-          Project - {title}
-        </h2>
-
-        <div class="my-10 w-full text-center font-k2d">
-          {
-            pubDate && (
-              <div>
-                Published:{" "}
-                <span class="font-semibold text-current">
-                  {" "}
-                  {pubDate.toLocaleDateString()}
-                </span>
-              </div>
-            )
-          }
-        </div>
-
-        <div
-          class="tags mx-auto flex w-[100%] max-w-xl flex-wrap items-center justify-evenly gap-5"
-        >
-          {
-            tags.map((tag) => (
-              <span class="rounded-full bg-primaryDark px-4 py-1 text-white">
-                {tag}
-              </span>
-            ))
-          }
-        </div>
-      </div>
-
-      <Swiper
-        client:only
-        slides={swiperSlides}
-        bgImageUrl={swiperBgImage}
-        className="my-8 h-60 md:h-[24rem] lg:h-[32rem]"
-      />
-
-      <div
-        class="project-info flex flex-col items-center gap-12 px-6 pb-8 md:px-12 lg:pt-6"
+  <main id="main-content" tabindex="-1" class="site-container detail-main">
+    <a class="text-link detail-back" href="/#projects"
+      ><FiArrowLeft aria-hidden="true" /> Back to work</a
+    >
+    <header class="detail-heading">
+      <p class="eyebrow section-index">
+        From the project archive {
+          pubDate && (
+            <>
+              <>
+                <span aria-hidden="true">/</span>
+                <time datetime={pubDate.toISOString()}>
+                  {formatDate(pubDate)}
+                </time>
+              </>
+            </>
+          )
+        }
+      </p><h1>{title}</h1><p class="detail-description">{description}</p><ul
+        class="tag-list"
+        aria-label="Project focus"
       >
-        <div class="text max-w-4xl md:text-lg lg:text-xl lg:leading-9">
-          <slot />
-        </div>
-
-        <div
-          class="flex flex-wrap items-center justify-center gap-x-16 gap-y-8"
-        >
-          <a
-            href={buttons?.repoButton.url || "https://github.com"}
-            target="_blank"
-          >
-            <Button
-              theme={"outline-dark"}
-              class="flex items-center gap-2 px-4 py-2"
+        {tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+    </header>
+    {
+      swiperBgImage && (
+        <img
+          class="detail-image"
+          src={swiperBgImage}
+          alt={`${title} website preview`}
+          width="1200"
+          height="675"
+        />
+      )
+    }
+    <div class="project-body">
+      {
+        swiperSlides.length > 0 && (
+          <div class="project-notes">
+            {swiperSlides.map((slide) => (
+              <section>
+                <h2>{slide.title}</h2>
+                <p>{slide.description}</p>
+              </section>
+            ))}
+          </div>
+        )
+      }
+      <article class="prose dark:prose-invert"><slot /></article>
+      <div class="project-actions">
+        <a
+          class={buttonVariants({ variant: "outline" })}
+          href={buttons.repoButton.url}
+          target="_blank"
+          rel="noreferrer"
+          >{buttons.repoButton.text} <FiGithub aria-hidden="true" /></a
+        >{
+          buttons.liveDemoButton && (
+            <a
+              class={buttonVariants()}
+              href={buttons.liveDemoButton.url}
+              target="_blank"
+              rel="noreferrer"
             >
-              {buttons?.repoButton.text || "Repo"}
-              <BsGithub />
-            </Button>
-          </a>
-
-          {
-            buttons.liveDemoButton && (
-              <a
-                href={buttons?.liveDemoButton.url || "https://dev.butadpj.com"}
-                target="_blank"
-              >
-                <Button
-                  theme={"outline"}
-                  class="flex items-center gap-2 px-4 py-2"
-                >
-                  {buttons?.liveDemoButton.text || "Live demo"}
-                  <BsCursorFill />
-                </Button>
-              </a>
-            )
-          }
-        </div>
-
-        <div class="w-full max-w-4xl">
-          <h2 class="mb-5 text-2xl text-primaryDark dark:text-primary">
-            Technologies:
-          </h2>
-
-          {
-            technologies.length > 0 && (
-              <ul class="ml-2 flex list-inside list-disc flex-col gap-5 italic">
+              {buttons.liveDemoButton.text}{" "}
+              <FiArrowUpRight aria-hidden="true" />
+            </a>
+          )
+        }
+      </div>
+      {
+        technologies.length > 0 && (
+          <section class="technology-list" aria-labelledby="technologies-title">
+            <>
+              <h2 id="technologies-title">Built with</h2>
+              <ul>
                 {technologies.map((technology) => (
                   <li>
-                    <span>{technology.title}</span> - {technology.description}
+                    <strong>{technology.title}</strong> ·{" "}
+                    {technology.description}
                   </li>
                 ))}
               </ul>
-            )
-          }
-        </div>
-      </div>
-    </main>
-  </MomentumScroll>
+            </>
+          </section>
+        )
+      }
+    </div>
+  </main>
+  <Footer />
 </Layout>

@@ -1,0 +1,75 @@
+---
+import { skills } from "../../data/portfolio";
+import Experience from "./Experience";
+---
+
+<section class="about-band" id="about" aria-labelledby="about-title">
+  <div class="site-container section-space">
+    <div class="about-grid">
+      <div class="about-art">
+        <div class="illustration-orbit" aria-hidden="true"></div><img
+          class="coder-illustration"
+          src="/assets/coder.svg"
+          alt="The original portfolio illustration of a developer at a desk"
+          width="420"
+          height="420"
+          loading="lazy"
+        /><img
+          class="about-dots"
+          src="/assets/dots.svg"
+          alt=""
+          width="28"
+          height="95"
+          loading="lazy"
+        /><p class="art-caption">
+          Code. Coffee. Boxing. <span aria-hidden="true">↗</span>
+        </p>
+      </div>
+      <div class="about-copy">
+        <p class="eyebrow section-index">02 / The person behind the code</p><h2
+          id="about-title"
+        >
+          Hello, I'm Paul <span class="wave" aria-hidden="true">👋</span>
+        </h2><p class="about-lead">
+          Self-taught. Still curious.<br />Still figuring things out by
+          building.
+        </p><p>
+          I started with websites and interfaces. These days, I build agentic
+          systems, evaluate AI behavior, and work on learning tools at Egoist
+          Labs.
+        </p><p>
+          The thread through all of it: solving people's problems with
+          technology and design. Outside the code? Coffee, boxing, and rap
+          music.
+        </p><div class="skills-groups">
+          {
+            skills.map((group) => (
+              <div>
+                <>
+                  <h3 class="small-label">{group.label}</h3>
+                  <ul class="tag-list">
+                    {group.items.map((skill) => (
+                      <li>{skill}</li>
+                    ))}
+                  </ul>
+                </>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="supporting-metrics">
+      <div>
+        <strong>80% less</strong><p>
+          manual regression testing time<span>Quantrics · Test automation</span>
+        </p>
+      </div><div>
+        <strong>50% lower</strong><p>
+          system costs<span>Prosple · Production system redesign</span>
+        </p>
+      </div>
+    </div>
+    <Experience client:visible />
+  </div>
+</section>

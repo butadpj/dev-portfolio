@@ -1,58 +1,81 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import "../styles/global.css";
 
 export interface Props {
   title: string;
   description?: string;
-  ogMeta?: {
-    title: string;
-    url?: string;
-    image?: string;
-  };
+  ogMeta?: { title?: string; url?: string; image?: string };
 }
 
 const {
-  title = "butadpj - Coding, Coffee, & Fitness 💻☕️💪",
-  description = "I'm Paul, a Filipino software developer. I love solving people's problems with the help of my own unique experiences.",
-  ogMeta = {
-    title: "Solving people's problems through my own unique experiences.",
-    url: "https://dev.butadpj.com/",
-    image: "/assets/meta-img.png",
-  },
+  title = "Paul John Butad · AI Engineer & Founder",
+  description = "I'm Paul, an AI engineer and founder from the Philippines. I build agentic systems, evaluate what works, and turn feedback into better products.",
+  ogMeta = {},
 } = Astro.props;
+const pageUrl =
+  ogMeta.url || new URL(Astro.url.pathname, "https://dev.butadpj.com").href;
+const imageUrl = new URL(
+  ogMeta.image || "/assets/meta-img.png",
+  "https://dev.butadpj.com",
+).href;
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="title" content={title} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={ogMeta.url} />
+    <meta property="og:url" content={pageUrl} />
     <meta property="og:title" content={ogMeta.title || title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogMeta.image} />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={ogMeta.url} />
-    <meta property="twitter:title" content={ogMeta.title || title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={ogMeta.image} />
-
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogMeta.title || title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <link rel="canonical" href={pageUrl} />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" />
     <link rel="manifest" href="/site.webmanifest" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700&family=Mitr:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      (() => {
+        const applyTheme = (root) => {
+          let theme;
+          try {
+            theme = localStorage.getItem("theme");
+          } catch {}
+          const dark =
+            theme === "dark" ||
+            (theme !== "light" &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          root.classList.toggle("dark", dark);
+          root.style.colorScheme = dark ? "dark" : "light";
+        };
+        applyTheme(document.documentElement);
+        if (!window.__portfolioThemeReady) {
+          window.__portfolioThemeReady = true;
+          document.addEventListener("astro:before-swap", (event) =>
+            applyTheme(event.newDocument.documentElement),
+          );
+          window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", () =>
+              applyTheme(document.documentElement),
+            );
+        }
+      })();
+    </script>
     <ViewTransitions />
-
-    <!-- Google tag (gtag.js) -->
     <script
       type="text/partytown"
       async
@@ -63,208 +86,14 @@ const {
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-JTQE73033M");
     </script>
-
-    <script is:inline>
-      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      if (
-        localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-
-      // Whenever the user explicitly chooses light mode
-      localStorage.theme = "light";
-
-      // Whenever the user explicitly chooses dark mode
-      localStorage.theme = "dark";
-
-      // Whenever the user explicitly chooses to respect the OS preference
-      localStorage.removeItem("theme");
-    </script>
-
     <slot name="preload" />
-
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="font-mitr">
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <slot />
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <style is:global>
-      @import url("https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Mitr:wght@400;500;600;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-
-      :root {
-        --dark: 240 3% 7%;
-        --light: 222 100% 97%;
-        --accent: 25 94% 48%;
-        --primaryDark: 223 83% 46%;
-        --primaryLight: 223 21% 55%;
-        --primary: 223 100% 66%;
-        --accent2: 82 100% 68%;
-
-        --foreground: hsl(var(--dark));
-        --background: hsl(var(--light));
-      }
-
-      html.dark:root {
-        --dark: 240 3% 7%;
-        --light: 222 100% 97%;
-        --accent: 25 94% 48%;
-        --primaryDark: 223 83% 46%;
-        --primaryLight: 223 21% 55%;
-        --primary: 223 100% 66%;
-        --accent2: 82 100% 68%;
-
-        --foreground: hsl(var(--primary));
-        --background: hsl(var(--dark));
-      }
-
-      html.dark span {
-        color: hsl(var(--light));
-      }
-
-      html.dark ::selection {
-        color: hsl(var(--accent));
-        background: hsl(var(--primaryDark));
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        scroll-behavior: smooth;
-      }
-
-      body {
-        color: var(--foreground);
-        background: var(--background);
-      }
-
-      h1,
-      h2,
-      h3,
-      h4 {
-        font-weight: 500;
-      }
-
-      span {
-        color: hsl(var(--primaryDark));
-      }
-
-      code {
-        font-family:
-          Menlo,
-          Monaco,
-          Lucida Console,
-          Liberation Mono,
-          DejaVu Sans Mono,
-          Bitstream Vera Sans Mono,
-          Courier New,
-          monospace;
-      }
-
-      .glassmorphism {
-        /* From https://css.glass */
-        background: rgba(238, 243, 255, 0.2);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-      }
-
-      .glassmorphism-primary {
-        background: rgba(20, 75, 215, 0.8);
-        /* border-radius: 16px; */
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-      }
-
-      .text-shadow-sm {
-        text-shadow: 0px 2px 0px hsl(var(--accent));
-      }
-
-      .text-shadow {
-        text-shadow: 0px 4px 0px hsl(var(--accent));
-      }
-
-      .hoverable {
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .hoverable:hover {
-        filter: brightness(85%);
-      }
-
-      /* Toggle class */
-      .navbar.hide {
-        transform: translateY(-20vh);
-      }
-
-      .navbar-content.show {
-        transform: translateX(0vw);
-        /* touch-action: none; */
-      }
-
-      .navbar-logo.hide {
-        opacity: 0;
-      }
-
-      .no-highlight {
-        -webkit-tap-highlight-color: transparent;
-        -webkit-touch-callout: none;
-      }
-      .no-highlight:focus {
-        outline: none !important;
-      }
-
-      ::selection {
-        color: hsl(var(--light));
-        background: hsl(var(--primaryDark));
-      }
-
-      .wave {
-        animation-name: wave-animation; /* Refers to the name of your @keyframes element below */
-        animation-duration: 2.5s; /* Change to speed up or slow down */
-        animation-iteration-count: infinite; /* Never stop waving :) */
-        transform-origin: 70% 70%; /* Pivot around the bottom-left palm */
-        display: inline-block;
-      }
-
-      @keyframes wave-animation {
-        0% {
-          transform: rotate(0deg);
-        }
-        10% {
-          transform: rotate(40deg);
-        } /* The following five values can be played with to make the waving more or less extreme */
-        20% {
-          transform: rotate(-15deg);
-        }
-        30% {
-          transform: rotate(30deg);
-        }
-        40% {
-          transform: rotate(-10deg);
-        }
-        50% {
-          transform: rotate(15deg);
-        }
-        60% {
-          transform: rotate(0deg);
-        } /* Reset for the last half to pause */
-        100% {
-          transform: rotate(0deg);
-        }
-      }
-    </style>
   </body>
 </html>

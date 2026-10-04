@@ -1,111 +1,107 @@
-import { createSignal, onMount } from "solid-js";
-import Content from "./components/Content";
-import {
-  FaBrandsDev,
-  FaBrandsLinkedin,
-  FaBrandsSquareGithub,
-  FaBrandsSquareYoutube,
-  FaSolidBars,
-} from "solid-icons/fa";
-import {
-  closeWhenClickOutside,
-  scrollToActiveLink,
-  updateActiveLinkOnScroll,
-} from "./hooks";
+import { createSignal, For, onCleanup, onMount } from "solid-js";
+import { FiArrowUpRight, FiMenu, FiX } from "solid-icons/fi";
+import { navigation, profile } from "../../data/portfolio";
+import { Button, buttonVariants } from "../../components/ui/button";
+import ThemeToggle from "../../components/ThemeToggle";
 
 export default function Navbar() {
-  const [activeLink, setActiveLink] = createSignal<string>("home");
-  const [isContentOpen, setIsContentOpen] = createSignal(false);
-
-  const openNav = () => {
-    setIsContentOpen(true);
-  };
-
-  const closeNav = () => {
-    setIsContentOpen(false);
-  };
-
-  const initLinks = () => {
-    const links = [
-      { to: "#home", name: "Home" },
-      { to: "#about", name: "About" },
-      { to: "#projects", name: "Projects" },
-      { to: "#learn", name: "Learn" },
-      { to: "#contact", name: "Contact" },
-    ];
-
-    return links.map((link) => {
-      if (link.name.toLowerCase() === activeLink()) {
-        return { ...link, isActive: true };
-      }
-      return link;
-    });
-  };
+  const [open, setOpen] = createSignal(false);
+  let header: HTMLElement | undefined;
+  let trigger: HTMLButtonElement | undefined;
 
   onMount(() => {
-    closeWhenClickOutside(closeNav);
-    updateActiveLinkOnScroll(setActiveLink);
-    scrollToActiveLink(setActiveLink);
+    const outside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !header?.contains(event.target))
+        setOpen(false);
+    };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && open()) {
+        setOpen(false);
+        trigger?.focus();
+      }
+    };
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const resize = () => {
+      if (desktop.matches) setOpen(false);
+    };
+    document.addEventListener("pointerdown", outside);
+    document.addEventListener("keydown", escape);
+    desktop.addEventListener("change", resize);
+    onCleanup(() => {
+      document.removeEventListener("pointerdown", outside);
+      document.removeEventListener("keydown", escape);
+      desktop.removeEventListener("change", resize);
+    });
   });
 
   return (
-    <>
-      <nav class="navbar glassmorphism fixed z-30 flex w-full items-center justify-between border-b border-b-primary bg-light px-6 py-4 transition-transform delay-200 duration-300 md:px-10 md:py-6 lg:border-none lg:!bg-transparent lg:px-16 lg:py-8 lg:!shadow-none lg:!backdrop-blur-none">
-        <div
-          class={`navbar-logo scrollToTop hoverable  ${
-            isContentOpen() ? "opacity-0" : "opacity-100"
-          } `}
-        >
-          <a href="/" class="flex items-center gap-2">
-            <img
-              class="md:w-8"
-              src="/assets/logo-transparent.svg"
-              alt="butadpj's logo"
-              width="22"
-            />
-            <span class="navbar-logo-text text-shadow-sm mb-1 font-k2d text-xl font-bold italic text-primary md:text-2xl">
-              butadpj
-            </span>
+    <header class="site-header" ref={header}>
+      <div class="site-container header-inner">
+        <a href="/" class="wordmark" aria-label="butadpj home">
+          <img
+            src="/assets/logo-transparent.svg"
+            alt=""
+            width="29"
+            height="34"
+          />
+          <span>
+            butadpj<span class="wordmark-dot">.</span>
+          </span>
+        </a>
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <For each={navigation}>
+            {(item) => <a href={item.href}>{item.label}</a>}
+          </For>
+        </nav>
+        <div class="header-actions">
+          <ThemeToggle />
+          <a
+            class={buttonVariants({
+              variant: "outline",
+              size: "sm",
+              class: "header-resume",
+            })}
+            href={profile.resume}
+            download
+          >
+            Resume <FiArrowUpRight aria-hidden="true" />
           </a>
+          <Button
+            ref={trigger}
+            variant="ghost"
+            size="icon"
+            class="menu-toggle"
+            aria-expanded={open()}
+            aria-controls="mobile-navigation"
+            aria-label={open() ? "Close menu" : "Open menu"}
+            onClick={() => setOpen(!open())}
+          >
+            {open() ? (
+              <FiX aria-hidden="true" />
+            ) : (
+              <FiMenu aria-hidden="true" />
+            )}
+          </Button>
         </div>
-
-        <div
-          onClick={openNav}
-          class="navbar-bars hoverable cursor-pointer rounded-md bg-primary p-2 text-white"
-        >
-          <FaSolidBars class="text-xl md:text-2xl lg:text-3xl" />
-        </div>
-      </nav>
-
-      <Content
-        class="glassmorphism-primary"
-        isOpen={isContentOpen()}
-        closeButtonClick={closeNav}
+      </div>
+      <nav
+        id="mobile-navigation"
+        class="mobile-nav site-container"
+        hidden={!open()}
+        aria-label="Mobile navigation"
       >
-        <Content.Links links={initLinks()} setActiveLink={setActiveLink} />
-        <Content.Resume />
-        <Content.Socials
-          class="text-3xl md:text-5xl"
-          socials={[
-            {
-              href: "https://github.com/butadpj",
-              icon: <FaBrandsSquareGithub />,
-            },
-            {
-              href: "https://dev.to/butadpj",
-              icon: <FaBrandsDev />,
-            },
-            {
-              href: "https://www.youtube.com/@butadpj",
-              icon: <FaBrandsSquareYoutube />,
-            },
-            {
-              href: "https://www.linkedin.com/in/paul-john-butad-5bb70a218",
-              icon: <FaBrandsLinkedin />,
-            },
-          ]}
-        />
-      </Content>
-    </>
+        <For each={navigation}>
+          {(item) => (
+            <a href={item.href} onClick={() => setOpen(false)}>
+              {item.label}
+              <FiArrowUpRight aria-hidden="true" />
+            </a>
+          )}
+        </For>
+        <a href={profile.resume} download onClick={() => setOpen(false)}>
+          Download resume <FiArrowUpRight aria-hidden="true" />
+        </a>
+      </nav>
+    </header>
   );
 }

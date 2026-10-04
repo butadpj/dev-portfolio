@@ -1,0 +1,116 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { FiArrowUpRight } from "solid-icons/fi";
+import { buttonVariants } from "../ui/button";
+interface Props {
+  projects: CollectionEntry<"projects">[];
+}
+const { projects } = Astro.props;
+---
+
+<section
+  class="site-container section-space"
+  id="projects"
+  aria-labelledby="work-title"
+>
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow section-index">01 / Selected work</p><h2
+        id="work-title"
+      >
+        Built for real people.
+      </h2>
+    </div><p>From AI learning systems<br />to my own little coffee business.</p>
+  </div>
+  <article class="featured-work">
+    <div class="featured-copy">
+      <p class="eyebrow">Founder · Dec 2025 — Present</p><h3>
+        Egoist Labs<span class="accent-period">.</span>
+      </h3><p>
+        Learning systems that connect skill-based curricula, AI-assisted
+        planning, and a clearer picture of learner progress.
+      </p><ul class="tag-list" aria-label="Focus areas">
+        <li>AI workflows</li><li>Curriculum authoring</li><li>
+          Progress tracking
+        </li>
+      </ul><a
+        class={buttonVariants({ variant: "outline" })}
+        href="https://www.egoistlabs.com/"
+        target="_blank"
+        rel="noreferrer"
+        >Explore Egoist Labs <FiArrowUpRight aria-hidden="true" /></a>
+    </div>
+    <div
+      class="studio-diagram"
+      aria-label="Capability Studio: skill-based curriculum, expert review, AI regeneration, and an updated curriculum"
+    >
+      <div class="studio-top">
+        <span class="studio-dot" aria-hidden="true"></span><span
+          >Capability Studio</span
+        ><span aria-hidden="true">↗</span>
+      </div>
+      <div class="studio-flow">
+        <div>
+          <span class="flow-number">01</span><span>Define the skills</span
+          ><small>Curriculum & capabilities</small>
+        </div><span class="flow-connector" aria-hidden="true">↓</span><div>
+          <span class="flow-number">02</span><span>Bring in human judgment</span
+          ><small>Expert review & feedback</small>
+        </div><span class="flow-connector" aria-hidden="true">↓</span><div
+          class="flow-result"
+        >
+          <span class="flow-number">03</span><span>Build the next version</span
+          ><small>AI regeneration → updated curriculum</small>
+        </div>
+      </div>
+      <p class="studio-footnote">
+        A feedback loop, built into the work. <span aria-hidden="true">↺</span>
+      </p>
+    </div>
+  </article>
+  <div class="archive-heading">
+    <h3>A couple from the archive</h3><p>The web projects that got me here.</p>
+  </div>
+  <div class="project-grid">
+    {
+      projects.map(({ data, slug }) => (
+        <article class="project-card">
+          <a
+            class="project-image-link"
+            href={`/projects/${slug}/`}
+            aria-label={`Read about ${data.title}`}
+          >
+            {data.swiperBgImage && (
+              <img
+                src={data.swiperBgImage}
+                alt={`${data.title} website`}
+                width="720"
+                height="405"
+                loading="lazy"
+              />
+            )}
+            <span class="project-image-arrow" aria-hidden="true">
+              <FiArrowUpRight />
+            </span>
+          </a>
+          <div class="project-card-heading">
+            <>
+              <h3>
+                <a href={`/projects/${slug}/`}>
+                  {data.logo.text || data.title}
+                </a>
+              </h3>
+              <span class="small-label">{data.pubDate.getUTCFullYear()}</span>
+            </>
+          </div>
+          <p>{data.description}</p>
+          <ul class="tag-list" aria-label="Project focus">
+            {data.tags?.slice(0, 3).map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</section>

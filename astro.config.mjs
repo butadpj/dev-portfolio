@@ -8,6 +8,7 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://dev.butadpj.com",
   markdown: {
     shikiConfig: {
       wrap: true,

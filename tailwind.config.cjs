@@ -5,6 +5,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        card: "var(--card)",
+        muted: "var(--muted)",
+        "muted-foreground": "var(--muted-foreground)",
+        border: "var(--border)",
         primary: "hsl(var(--primary))",
         primaryFade: "#5283ff26",
         primaryLight: "hsl(var(--primaryLight))",

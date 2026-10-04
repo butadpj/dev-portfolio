@@ -1,20 +1,18 @@
 ---
-import { FaRegularSun, FaSolidMoon, FaSolidSun } from "solid-icons/fa";
 import Layout from "./Root.astro";
-import { FiMoon, FiSun } from "solid-icons/fi";
-import ThemeSwitcher from "../sharedComponents/ThemeSwitcher.astro";
-import { Image } from "astro:assets";
+import Navbar from "../sharedComponents/Navbar/Navbar";
+import Footer from "../components/Footer.astro";
+import { FiArrowLeft } from "solid-icons/fi";
 import { formatDate } from "../utils";
 
 interface Props {
   title: string;
   description: string;
-  tags?: Array<string>;
+  tags?: string[];
   pubDate?: Date;
   backgroundImage?: string;
   isDraft?: boolean;
 }
-
 const {
   title,
   description,
@@ -23,105 +21,62 @@ const {
   backgroundImage,
   isDraft,
 } = Astro.props;
-
-const url = Astro.request.url;
-
-const currentYear = new Date().getFullYear();
 ---
 
 <Layout
-  title={`${title}`}
+  title={`${title} · butadpj`}
   description={description}
-  ogMeta={{
-    title: title,
-    url,
-    image: backgroundImage,
-  }}
+  ogMeta={{ title, image: backgroundImage }}
 >
+  <Navbar client:load />
   {
     isDraft && (
-      <div class="sticky top-0 z-20 bg-accent text-center font-normal italic text-white px-4">
-        This is a draft. The author is having trouble finishing this blog lol 😭
-      </div>
+      <p class="draft-notice">
+        This is a draft. Still figuring this one out 😅
+      </p>
     )
   }
-
-  <main class="p-6 md:px-16 lg:px-32 xl:px-60 2xl:px-96">
-    <header class="flex items-center justify-between md:px-4">
-      <a href="/" class="flex w-fit items-center gap-2">
-        <img
-          class="md:w-8"
-          src="/assets/logo-transparent.svg"
-          alt="butadpj's logo"
-          width="22"
-        />
-        <span
-          class="navbar-logo-text text-shadow-sm mb-1 font-k2d text-xl font-bold italic text-primary md:text-2xl"
-        >
-          butadpj
-        </span>
-      </a>
-
-      <div class="buttons">
-        <ThemeSwitcher />
-
-      </div>
-    </header>
-
-    <div class="mb-10 mt-20 space-y-6">
-      <h1
-        class={`section-title relative font-openSans text-4xl font-bold text-center`}
-      >
-        {title}
-      </h1>
-
-      <div class="w-full text-center font-k2d">
-        {
+  <main
+    id="main-content"
+    tabindex="-1"
+    class="site-container detail-main article-main"
+  >
+    <a class="text-link detail-back" href="/#learn"
+      ><FiArrowLeft aria-hidden="true" /> Back to writing</a
+    >
+    <header class="detail-heading">
+      <p class="eyebrow section-index">
+        Notes by Paul {
           pubDate && (
-            <div>
-              Published:{" "}
-              <span class="font-semibold text-current">
-                {formatDate(pubDate)}
-              </span>
-            </div>
+            <>
+              <>
+                <span aria-hidden="true">/</span>
+                <time datetime={pubDate.toISOString()}>
+                  {formatDate(pubDate)}
+                </time>
+              </>
+            </>
           )
         }
-      </div>
-
-      <div
-        class="tags mx-auto flex w-[100%] max-w-xl flex-wrap items-center justify-center gap-5"
+      </p><h1>{title}</h1><p class="detail-description">{description}</p><ul
+        class="tag-list"
+        aria-label="Article topics"
       >
-        {
-          tags.map((tag) => (
-            <span class="rounded-full bg-primaryDark px-4 py-1 capitalize text-white">
-              {tag}
-            </span>
-          ))
-        }
-      </div>
-
-      <div class="my-6 w-full">
-        <Image
-          src={backgroundImage || ""}
-          alt={"Blog's background image"}
-          width={360}
-          height={200}
-          class={"rounded-lg w-full h-full object-cover"}
+        {tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+    </header>
+    {
+      backgroundImage && (
+        <img
+          class="detail-image"
+          src={backgroundImage}
+          alt={`${title} cover`}
+          width="850"
+          height="478"
         />
-      </div>
-    </div>
-
-    <hr class="my-6" />
-
-    <article
-      class="prose mx-auto mb-10 font-openSans dark:prose-invert lg:text-lg xl:text-xl 2xl:text-2xl"
-    >
-      <slot />
-    </article>
-    <hr class="mt-6" />
+      )
+    }
+    <article class="prose dark:prose-invert article-prose"><slot /></article>
   </main>
-
-  <footer class="px-4 pb-10 pt-2 text-center font-k2d text-gray-500">
-    &copy; {currentYear} butadpj. All rights reserved.
-  </footer>
+  <Footer />
 </Layout>
