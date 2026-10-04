@@ -5,5 +5,7 @@
     "allowJs": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js"
-  }
+  },
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "node_modules"]
 }

@@ -33,7 +33,7 @@ export default function Hero() {
             </a>
             <a
               href={profile.resume}
-              download
+              download=""
               class={buttonVariants({ variant: "ghost" })}
             >
               My resume <FiDownload aria-hidden="true" />

@@ -62,7 +62,7 @@ export default function Navbar() {
               class: "header-resume",
             })}
             href={profile.resume}
-            download
+            download=""
           >
             Resume <FiArrowUpRight aria-hidden="true" />
           </a>
@@ -98,7 +98,7 @@ export default function Navbar() {
             </a>
           )}
         </For>
-        <a href={profile.resume} download onClick={() => setOpen(false)}>
+        <a href={profile.resume} download="" onClick={() => setOpen(false)}>
           Download resume <FiArrowUpRight aria-hidden="true" />
         </a>
       </nav>

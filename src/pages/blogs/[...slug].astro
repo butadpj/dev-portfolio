@@ -1,17 +1,19 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import BlogLayout from "../../layouts/Blog.astro";
-// 1. Generate a new path for every collection entry
+// Keep existing URLs using the content loader's extensionless entry IDs.
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blogs");
   return blogEntries.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
-// 2. For your template, you can get the entry directly from the prop
+interface Props {
+  entry: import("astro:content").CollectionEntry<"blogs">;
+}
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 const data = entry.data;
 ---

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Original palette and typefaces, with shared semantic roles for components. */
 :root {
   --dark: 240 3% 7%;

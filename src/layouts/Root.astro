@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 
 export interface Props {
@@ -75,7 +75,7 @@ const imageUrl = new URL(
         }
       })();
     </script>
-    <ViewTransitions />
+    <ClientRouter />
     <script
       type="text/partytown"
       async

@@ -1,8 +1,8 @@
-import { z } from "astro:content";
+import { z } from "astro/zod";
 
 export const projetsSchemas = z.object({
   title: z.string(),
-  pubDate: z.date(),
+  pubDate: z.coerce.date(),
   description: z.string(),
   isSuperProject: z.boolean().default(false),
   logo: z.object({
@@ -47,7 +47,7 @@ export const projetsSchemas = z.object({
 
 export const blogsSchemas = z.object({
   title: z.string(),
-  pubDate: z.date(),
+  pubDate: z.coerce.date(),
   description: z.string(),
   backgroundImage: z.string().optional(),
   tags: z.array(z.string()).optional(),

@@ -38,7 +38,8 @@ const { projects } = Astro.props;
         href="https://www.egoistlabs.com/"
         target="_blank"
         rel="noreferrer"
-        >Explore Egoist Labs <FiArrowUpRight aria-hidden="true" /></a>
+        >Explore Egoist Labs <FiArrowUpRight aria-hidden="true" /></a
+      >
     </div>
     <div
       class="studio-diagram"
@@ -73,11 +74,11 @@ const { projects } = Astro.props;
   </div>
   <div class="project-grid">
     {
-      projects.map(({ data, slug }) => (
+      projects.map(({ data, id }) => (
         <article class="project-card">
           <a
             class="project-image-link"
-            href={`/projects/${slug}/`}
+            href={`/projects/${id}/`}
             aria-label={`Read about ${data.title}`}
           >
             {data.swiperBgImage && (
@@ -96,9 +97,7 @@ const { projects } = Astro.props;
           <div class="project-card-heading">
             <>
               <h3>
-                <a href={`/projects/${slug}/`}>
-                  {data.logo.text || data.title}
-                </a>
+                <a href={`/projects/${id}/`}>{data.logo.text || data.title}</a>
               </h3>
               <span class="small-label">{data.pubDate.getUTCFullYear()}</span>
             </>

@@ -24,9 +24,9 @@ const { blogs } = Astro.props;
   </div>
   <div class="writing-list">
     {
-      blogs.map(({ data, slug, body }, index) => (
+      blogs.map(({ data, id, body }, index) => (
         <article class="writing-item">
-          <a href={`/blogs/${slug}/`}>
+          <a href={`/blogs/${id}/`}>
             <>
               <span class="writing-number" aria-hidden="true">
                 {String(index + 1).padStart(2, "0")}
@@ -39,7 +39,7 @@ const { blogs } = Astro.props;
                         {formatDate(data.pubDate)}
                       </time>
                       <span aria-hidden="true">/</span>
-                      <span>{calculateReadingTime(body)} min read</span>
+                      <span>{calculateReadingTime(body ?? "")} min read</span>
                     </>
                   </div>
                   <h3>{data.title}</h3>

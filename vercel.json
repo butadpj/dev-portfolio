@@ -5,5 +5,7 @@
       "destination": "https://dev.butadpj.com/blogs/devops-for-web-devs",
       "permanent": true
     }
-  ]
+  ],
+  "installCommand": "corepack yarn install --immutable",
+  "buildCommand": "corepack yarn build"
 }
